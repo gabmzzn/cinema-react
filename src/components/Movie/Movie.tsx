@@ -1,23 +1,22 @@
 import css from './Movie.module.scss'
 
 export interface MovieProps {
-	id: number,
 	title: string,
 	overview: string,
-	poster_path: string,
-	vote_average: number
+	poster: string,
+	rating: number
 }
 
-export const Movie = ({ id, title, overview, poster_path, vote_average }: MovieProps) => {
+export const Movie = ({ title, overview, poster, rating }: MovieProps) => {
 	return (
-		<div key={id} style={{ width: '400px' }}>
+		<div className={css.movie}>
 			<h3>{title}</h3>
 			<img
-				src={`https://image.tmdb.org/t/p/original/${poster_path}`}
+				src={`https://image.tmdb.org/t/p/w200${poster}`}
 				height={'250px'}
 				alt={title} />
-			<p>{overview}</p>
-			<h2><b>{vote_average}</b></h2>
+			{/* <p>{overview}</p> */}
+			<h2><b>{rating}</b></h2>
 		</div>
 	)
 }
