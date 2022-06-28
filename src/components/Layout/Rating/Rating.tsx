@@ -1,6 +1,4 @@
-import { useState, useEffect } from 'react'
 import Rating from '@mui/material/Rating'
-
 
 export default function BasicRating(props: any) {
 

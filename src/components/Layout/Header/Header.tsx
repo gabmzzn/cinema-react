@@ -1,4 +1,3 @@
-import { Rating } from '@mui/material'
 import css from './Header.module.scss'
 
 export const Header = () => {

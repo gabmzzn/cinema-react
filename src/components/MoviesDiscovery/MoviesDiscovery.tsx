@@ -1,6 +1,6 @@
 import css from './MoviesDiscovery.module.scss'
 import { useEffect, useState } from 'react'
-import { Movie, MovieProps } from '../Movie/Movie'
+import { Movie } from '../Movie/Movie'
 import BasicRating from '../Layout/Rating/Rating'
 
 const apiKey = process.env.REACT_APP_API_KEY
