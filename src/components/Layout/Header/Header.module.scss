@@ -6,8 +6,11 @@
 	.navbar {
 		position: fixed;
 		width: 100%;
-		background-color: dodgerblue;
+		background-color: rgba(226, 25, 25, 0.7);
+		backdrop-filter: blur(20px);
+		box-shadow: 0 0 30px rgba(0, 0, 0, 0.8);
 		color: white;
+		z-index: 100;
 
 		.content {
 			display: flex;

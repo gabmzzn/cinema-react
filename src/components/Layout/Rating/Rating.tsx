@@ -9,7 +9,7 @@ export default function BasicRating(props: any) {
 			size='large'
 			name="simple-controlled"
 			value={value}
-			onChange={handleChange}
+			onChange={(event, value) => handleChange(event, value)}
 		/>
 	)
 }

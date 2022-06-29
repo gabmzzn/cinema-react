@@ -1,13 +1,14 @@
 import './App.css'
-import { MoviesDiscovery } from './components/MoviesDiscovery/MoviesDiscovery'
+import { MoviesDiscovery } from './pages/MoviesDiscovery/MoviesDiscovery'
 import { Header } from './components/Layout/Header/Header'
+import { Outlet, Link } from "react-router-dom"
 
 function App() {
 	return (
 		<>
 			<Header />
 			<div className="body">
-				<MoviesDiscovery />
+				<Outlet />
 			</div>
 		</>
 	)
