@@ -1,5 +1,5 @@
 import './styles/App.css'
-import { MoviesDiscovery } from './pages/MoviesDiscovery/MoviesDiscovery'
+import { MoviesDiscovery } from './components/pages/MoviesDiscovery/MoviesDiscovery'
 import { Header } from './components/Layout/Header/Header'
 import { Outlet, Link } from "react-router-dom"
 

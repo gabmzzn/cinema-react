@@ -21,13 +21,12 @@ a {
 	color: rgb(80, 80, 80) !important;
 }
 
+
+.MuiPaginationItem-root {
+	color: white !important;
+}
+
 code {
 	font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
 		monospace;
-}
-
-.infinite-scroll-component {
-	text-align: center;
-	display: flex;
-	flex-wrap: wrap;
 }

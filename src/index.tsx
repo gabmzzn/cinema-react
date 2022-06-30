@@ -9,10 +9,10 @@ import {
 	Navigate,
 	Route,
 } from "react-router-dom"
-import { MovieDetails } from './pages/MovieDetails/MovieDetails'
-import { MoviesDiscovery } from './pages/MoviesDiscovery/MoviesDiscovery'
-import { MoviesSection } from './pages/MoviesSection/MoviesSection'
-import { MoviesSearch } from './pages/MoviesSearch/MoviesSearch'
+import { MovieDetails } from './components/pages/MovieDetails/MovieDetails'
+import { MoviesDiscovery } from './components/pages/MoviesDiscovery/MoviesDiscovery'
+import { MoviesSection } from './components/pages/MoviesSection/MoviesSection'
+import { MoviesSearch } from './components/pages/MoviesSearch/MoviesSearch'
 
 const root = ReactDOM.createRoot(
 	document.getElementById('root') as HTMLElement
@@ -24,16 +24,23 @@ root.render(
 				<Route path="/" element={<App />}>
 					<Route path="/" element={<Navigate to="/discover/" replace />} />
 					<Route path='/discover/' element={<MoviesDiscovery />} />
-					<Route path='/discover/trending'
-						element={<MoviesSection section={'trending'} />}
-					/>
-					<Route path='/discover/latest'
-						element={<MoviesSection section={'latest'} />}
-					/>
-					<Route path='/discover/foryou'
-						element={<MoviesSection section={'foryou'} />}
-					/>
-					<Route path="/search/:id" element={<MoviesSearch />} />
+					<Route path='/discover/popular/:page'
+						element={<MoviesSection
+							section={'popular'}
+							title={'Popular Right Now 🔥'}
+							sortBy={'popularity.desc'}
+						/>} />
+					<Route path='/discover/latest/:page'
+						element={<MoviesSection
+							section={'latest'}
+							title={'Latest Releases 🍿'}
+							sortBy={'release_date.desc&vote_count.gte=20'} />} />
+					<Route path='/discover/foryou/:page'
+						element={
+							<MoviesSection section={'foryou'} title={'For you'}
+								sortBy={''}
+							/>} />
+					<Route path="/search/:query/:page" element={<MoviesSearch />} />
 					<Route path="/movie/:id" element={<MovieDetails />} />
 					<Route path="*"
 						element={

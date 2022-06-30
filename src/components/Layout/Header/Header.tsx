@@ -1,8 +1,8 @@
 import css from './Header.module.scss'
 import { Link, Navigate, useNavigate, useSearchParams } from 'react-router-dom'
-import BasicRating from '../Rating/Rating'
+import MovieRating from '../MovieRating/MovieRating'
 import { useEffect, useState, useCallback } from 'react'
-import { MoviesSearch } from '../../../pages/MoviesSearch/MoviesSearch'
+import { MoviesSearch } from '../../pages/MoviesSearch/MoviesSearch'
 
 export const Header = () => {
 
@@ -12,7 +12,7 @@ export const Header = () => {
 	useEffect(() => {
 		if (query !== undefined) {
 			const timer = setTimeout(() => {
-				query !== '' ? navigate(`/search/${query}`) : navigate('/discover/')
+				query !== '' ? navigate(`/search/${query}/1`) : navigate('/discover/')
 			}, 1000)
 			return () => clearTimeout(timer)
 		}
@@ -30,13 +30,9 @@ export const Header = () => {
 							onKeyPress={(e: any) => {
 								if (e.key === "Enter") {
 									e.preventDefault()
-									navigate(`/search/${e.target.value}`)
+									navigate(`/search/${e.target.value}/1`)
 								}
 							}}
-						/>
-						<BasicRating
-						// value={rating}
-						// handleChange={(e: number, value: number) => setRating(value)}
 						/>
 					</div>
 				</div>

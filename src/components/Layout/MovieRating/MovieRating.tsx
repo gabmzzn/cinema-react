@@ -1,6 +1,6 @@
 import Rating from '@mui/material/Rating'
 
-export default function BasicRating(props: any) {
+export default function MovieRating(props: { value: number | null, handleChange: any }) {
 
 	const { value, handleChange } = props
 

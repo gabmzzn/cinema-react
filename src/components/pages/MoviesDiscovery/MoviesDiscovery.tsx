@@ -1,6 +1,6 @@
 import css from './MoviesDiscovery.module.scss'
 import { useEffect, useState, useCallback } from 'react'
-import { Movie } from '../../components/Movie/Movie'
+import { Movie } from '../../Movie/Movie'
 import { Outlet, Link } from "react-router-dom"
 
 const apiKey = process.env.REACT_APP_API_KEY
@@ -40,16 +40,14 @@ export const MoviesDiscovery = () => {
 			latest: latest.results.slice(0, 4)
 		}
 		setMovies(movies)
-		console.log('discover')
 	}, [])
 
 	useEffect(() => { fetchMovies() }, [fetchMovies])
 
-
 	return (
 		<>
-			<Link to={'trending'}>
-				<h1>Trending Right Now 🔥</h1>
+			<Link to={'popular/1'}>
+				<h1>Popular Right Now 🔥</h1>
 			</Link>
 			<div className={css.main}>
 				{movies ?
@@ -62,7 +60,7 @@ export const MoviesDiscovery = () => {
 						</Link>
 					) : <h1>Loading</h1>}
 			</div>
-			<Link to={'latest'}>
+			<Link to={'latest/1'}>
 				<h1>Latest Releases🍿</h1>
 			</Link>
 			<div className={css.main}>
