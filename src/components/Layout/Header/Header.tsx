@@ -12,7 +12,7 @@ export const Header = () => {
 	useEffect(() => {
 		if (query !== undefined) {
 			const timer = setTimeout(() => {
-				navigate(`/search/${query}`)
+				query !== '' ? navigate(`/search/${query}`) : navigate('/discover')
 			}, 1000)
 			return () => clearTimeout(timer)
 		}
