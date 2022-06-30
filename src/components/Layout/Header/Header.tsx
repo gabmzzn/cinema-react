@@ -7,13 +7,15 @@ import { MoviesSearch } from '../../../pages/MoviesSearch/MoviesSearch'
 export const Header = () => {
 
 	let navigate = useNavigate()
-	const [query, setQuery] = useState('')
+	const [query, setQuery] = useState<string | undefined>(undefined)
 
 	useEffect(() => {
-		const timer = setTimeout(() => {
-			navigate(`/search/${query}`)
-		}, 1000)
-		return () => clearTimeout(timer)
+		if (query !== undefined) {
+			const timer = setTimeout(() => {
+				navigate(`/search/${query}`)
+			}, 1000)
+			return () => clearTimeout(timer)
+		}
 	}, [query])
 
 	return (
