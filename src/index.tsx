@@ -22,8 +22,8 @@ root.render(
 		<BrowserRouter>
 			<Routes>
 				<Route path="/" element={<App />}>
-					<Route path="/" element={<Navigate to="/discover" replace />} />
-					<Route path='/discover' element={<MoviesDiscovery />} />
+					<Route path="/" element={<Navigate to="/discover/" replace />} />
+					<Route path='/discover/' element={<MoviesDiscovery />} />
 					<Route path='/discover/trending'
 						element={<MoviesSection section={'trending'} />}
 					/>
