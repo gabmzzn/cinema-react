@@ -1,10 +1,20 @@
 .main {
 	display: flex;
 	flex-wrap: wrap;
+	justify-content: center;
+	width: 100%;
 }
 
 .header {
 	display: flex;
 	justify-content: space-between;
 	align-items: center;
+}
+
+.pagination {
+	margin: 25px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 100%;
 }

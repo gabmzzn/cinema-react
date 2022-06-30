@@ -1,8 +1,6 @@
 import css from './Header.module.scss'
-import { Link, Navigate, useNavigate, useSearchParams } from 'react-router-dom'
-import MovieRating from '../MovieRating/MovieRating'
-import { useEffect, useState, useCallback } from 'react'
-import { MoviesSearch } from '../../pages/MoviesSearch/MoviesSearch'
+import { Link, useNavigate } from 'react-router-dom'
+import { useEffect, useState } from 'react'
 
 export const Header = () => {
 

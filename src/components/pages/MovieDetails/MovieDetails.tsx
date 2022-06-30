@@ -13,7 +13,6 @@ export const MovieDetails = () => {
 
 	const [movie, setMovie] = useState<MovieDetail>()
 
-
 	useEffect(() => {
 		async function fetchMovie() {
 			const movie = await fetch(`

@@ -1,10 +1,10 @@
-import { useCallback, useState, useEffect } from "react"
+import { useState, useEffect } from "react"
 import MovieRating from "../../Layout/MovieRating/MovieRating"
 import { Movie } from "../../Movie/Movie"
 import { MovieOverview } from "../../MovieOverview/MovieOverview"
 import css from './MoviesSearch.module.scss'
 import Pagination from '@mui/material/Pagination'
-import { Link, Navigate, useNavigate, useSearchParams, Outlet, useParams } from 'react-router-dom'
+import { useNavigate, Outlet, useParams } from 'react-router-dom'
 
 interface Movie {
 	id: number
@@ -35,7 +35,6 @@ export const MoviesSearch = () => {
 			&query=${params.query}
 			&page=${params.page}
 			`).then(r => r.json())
-			console.log(movies)
 			const sortedMovies = movies.results
 				.sort((a: Movie, b: Movie) =>
 					b.vote_count - a.vote_count
@@ -63,6 +62,7 @@ export const MoviesSearch = () => {
 
 	const handlePageChange = (e: React.ChangeEvent<unknown>, page: number) => {
 		navigate(`/search/${params.query}/${page}`)
+		setRating(null)
 	}
 
 	return (
@@ -78,14 +78,11 @@ export const MoviesSearch = () => {
 				{movies && params.page ?
 					<>
 						{movies.map(movie =>
-							<Link
-								to={`../movie/${movie.id}-${movie.title.replaceAll(' ', '-').toLowerCase()}`}
-								key={movie.id}
-							>
-								<MovieOverview movie={movie} />
-							</Link>
+							<MovieOverview movie={movie} />
 						)}
-						<Pagination count={totalPages} page={parseInt(params.page)} onChange={handlePageChange} />
+						<div className={css.pagination}>
+							<Pagination siblingCount={3} size='large' count={totalPages} page={parseInt(params.page)} onChange={handlePageChange} />
+						</div>
 					</>
 					: <h1>Loading</h1>}
 				{movies?.length == 0 && <h1>No movies found</h1>}
