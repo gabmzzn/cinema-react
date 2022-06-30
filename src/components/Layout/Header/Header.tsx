@@ -22,7 +22,7 @@ export const Header = () => {
 			<div className={css.navbar}>
 				<div className={css.content}>
 					<Link to='/discover/'>
-						<h2>React Movies</h2>
+						<h2>ReactCinema</h2>
 					</Link>
 					<div className={css.search}>
 						<Input
