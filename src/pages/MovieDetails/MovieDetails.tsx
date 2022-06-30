@@ -1,5 +1,6 @@
 import { useParams } from "react-router-dom"
 import { useEffect, useState } from "react"
+import css from './MovieDetails.module.scss'
 
 const apiKey = process.env.REACT_APP_API_KEY
 
@@ -9,12 +10,13 @@ interface Movie {
 	original_title: string,
 	overview: string,
 	vote_average: number
-	videos: any
+	videos: any,
+	credits: any
 }
 
 export const MovieDetails = () => {
 
-	let params = useParams()
+	const params = useParams()
 	const { id, title } = params
 
 	const [movie, setMovie] = useState<Movie>()
@@ -26,7 +28,7 @@ export const MovieDetails = () => {
 			https://api.themoviedb.org/3/movie/${id}
 			?api_key=${apiKey}
 			&language=en-US
-			&append_to_response=videos
+			&append_to_response=videos,credits
 			`)
 				.then(r => r.json())
 			setMovie(data)
@@ -50,9 +52,9 @@ export const MovieDetails = () => {
 	}
 
 	return <>
-		<h1>Hello ❤️</h1>
 		{movie && <>
-			<h2>Your movie title is <b style={{ color: 'green' }}>{movie.original_title}</b> and it's scored <b style={{ color: 'red' }}>{movie.vote_average}</b></h2>
+			<h2><b style={{ color: 'green' }}>{movie.original_title}</b> scored <b style={{ color: 'red' }}>{movie.vote_average}</b></h2>
+			<h5>{movie.overview}</h5>
 			{videoTrailer() &&
 				<iframe width="860" height="515" src={`https://www.youtube.com/embed/${trailer}`}
 					title={movie.original_title}
@@ -61,9 +63,25 @@ export const MovieDetails = () => {
 					allowFullScreen
 				/>
 			}
-
-			<h5>{movie.overview}</h5>
 			<img src={`https://image.tmdb.org/t/p/w500${movie.backdrop_path}`} width={'800px'} />
+			<div className={css.cast}>
+				{movie.credits.cast.map((act: any) => {
+					const img = act.profile_path ?
+						`https://image.tmdb.org/t/p/w500${act.profile_path}` :
+						'https://www.themoviedb.org/assets/2/v4/glyphicons/basic/glyphicons-basic-4-user-grey-d8fe957375e70239d6abdd549fd7568c89281b2179b5f4470e2e12895792dfa5.svg'
+					return (
+						<div className={css.act}>
+							<div>
+								<h4>{act.name}</h4>
+								<h5>{act.character}</h5>
+								<img src={img} width={'200px'} />
+								<h5>{act.known_for_department}</h5>
+							</div>
+						</div>
+					)
+				}
+				)}
+			</div>
 		</>}
 	</>
 }

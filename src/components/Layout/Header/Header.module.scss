@@ -15,8 +15,14 @@
 		.content {
 			display: flex;
 			align-items: center;
-			justify-content: space-between;
 			padding: 0 1.5em;
 		}
 	}
+}
+
+.rating {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin-left: 20px;
 }

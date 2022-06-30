@@ -1,12 +1,11 @@
 import css from './MoviesDiscovery.module.scss'
 import { useEffect, useState, useCallback } from 'react'
 import { Movie } from '../../components/Movie/Movie'
-import BasicRating from '../../components/Layout/Rating/Rating'
 import { Outlet, Link } from "react-router-dom"
 
 const apiKey = process.env.REACT_APP_API_KEY
 
-interface Movies {
+interface Movie {
 	id: number,
 	title: string,
 	overview: string,
@@ -14,78 +13,70 @@ interface Movies {
 	vote_average: number
 }
 
+interface Movies {
+	trending: Movie[],
+	latest: Movie[]
+}
+
 export const MoviesDiscovery = () => {
 
-	const [movies, setMovies] = useState<Movies[] | undefined>()
-	const [page, setPage] = useState(1)
-	const [rating, setRating] = useState<number | null>(null)
-	const [query, setQuery] = useState('')
+	const [movies, setMovies] = useState<Movies>()
 
 	const fetchMovies = useCallback(async () => {
-		const movies = await fetch(`
+		const trending = await fetch(`
 		https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}
+		&sort_by=popularity.desc
 		&include_adult=false
-		&page=${page}
-		${rating ? `
-		&sort_by=vote_count.desc
-		&vote_average.gte=${rating * 2 - 2}
-		&vote_average.lte=${rating * 2}`
-				: `&sort_by=popularity.desc`}
-		`)
-			.then(r => r.json())
-
-		setMovies(movies.results)
-	}, [rating, page])
+		&page=1
+		`).then(r => r.json())
+		const latest = await fetch(`
+		https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}
+		&sort_by=release_date.desc&vote_count.gte=200
+		&include_adult=false
+		&page=1
+		`).then(r => r.json())
+		const movies = {
+			trending: trending.results.slice(0, 8),
+			latest: latest.results.slice(0, 4)
+		}
+		setMovies(movies)
+		console.log('discover')
+	}, [])
 
 	useEffect(() => { fetchMovies() }, [fetchMovies])
 
-	useEffect(() => {
-		query === '' && fetchMovies()
-	}, [query, fetchMovies])
-
-	async function searchMovies() {
-		const movies = await fetch(`
-			https://api.themoviedb.org/3/search/movie?api_key=${apiKey}
-			&include_adult=false
-			&language=en-US
-			&query=${query}
-			&page=1
-			`).then(m => m.json())
-		setMovies(movies.results)
-	}
 
 	return (
-		<div>
-			<div className={css.rating}>
-				<input
-					onKeyPress={e => e.key === 'Enter' && searchMovies()}
-					onChange={e => setQuery(e.target.value)}
-				/>
-				<button onClick={() => searchMovies()}>Search</button>
-
-				<h2>Rating</h2>
-				<BasicRating
-					value={rating}
-					handleChange={(e: number, value: number) => setRating(value)}
-				/>
-			</div>
+		<>
+			<Link to={'trending'}>
+				<h1>Trending Right Now 🔥</h1>
+			</Link>
 			<div className={css.main}>
 				{movies ?
-					movies.map(m =>
+					movies.trending.map((movie: any) =>
 						<Link
-							to={`movie/${m.id}/${m.title}`}
-							key={m.id}
+							to={`../movie/${movie.id}-${movie.title.replaceAll(' ', '-').toLowerCase()}`}
+							key={movie.id}
 						>
-							<Movie
-								title={m.title}
-								overview={m.overview}
-								poster={m.poster_path}
-								rating={m.vote_average}
-							/>
+							<Movie movie={movie} />
+						</Link>
+					) : <h1>Loading</h1>}
+			</div>
+			<Link to={'latest'}>
+				<h1>Latest Releases🍿</h1>
+			</Link>
+			<div className={css.main}>
+				{movies ?
+					movies.latest.map((movie: any) =>
+						<Link
+							to={`../movie/${movie.id}-${movie.title.replaceAll(' ', '-').toLowerCase()}`}
+							key={movie.id}
+						>
+							<Movie movie={movie} />
 						</Link>
 					) : <h1>Loading</h1>}
 			</div>
 			<Outlet />
-		</div>
+		</>
 	)
 }

@@ -1,14 +1,42 @@
 import css from './Header.module.scss'
-import { Link } from 'react-router-dom'
+import { Link, Navigate, useNavigate, useSearchParams } from 'react-router-dom'
+import BasicRating from '../Rating/Rating'
+import { useEffect, useState, useCallback } from 'react'
+import { MoviesSearch } from '../../../pages/MoviesSearch/MoviesSearch'
 
 export const Header = () => {
+
+	let navigate = useNavigate()
+	const [query, setQuery] = useState('')
+
+	useEffect(() => {
+		const timer = setTimeout(() => {
+			navigate(`/search/${query}`)
+		}, 1000)
+		return () => clearTimeout(timer)
+	}, [query])
+
 	return (
 		<div className={css.header}>
 			<div className={css.navbar}>
 				<div className={css.content}>
-					<Link to='/'>
+					<Link to='/discover'>
 						<h2>React Movies</h2>
 					</Link>
+					<div className={css.rating}>
+						<input type="search" onChange={e => setQuery(e.target.value)}
+							onKeyPress={(e: any) => {
+								if (e.key === "Enter") {
+									e.preventDefault()
+									navigate(`/search/${e.target.value}`)
+								}
+							}}
+						/>
+						<BasicRating
+						// value={rating}
+						// handleChange={(e: number, value: number) => setRating(value)}
+						/>
+					</div>
 				</div>
 			</div>
 		</div>)

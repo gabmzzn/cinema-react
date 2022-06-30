@@ -1,6 +1,11 @@
 .body {
-	margin: 10px;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
+	justify-content: center;
+	margin: 10px;
+}
+
+.content {
+	width: 1000px;
 }

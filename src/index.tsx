@@ -1,15 +1,18 @@
 import React from 'react'
 import ReactDOM from 'react-dom/client'
-import './index.css'
+import './styles/index.css'
 import App from './App'
-import reportWebVitals from './reportWebVitals'
+import reportWebVitals from './tests/reportWebVitals'
 import {
 	BrowserRouter,
 	Routes,
+	Navigate,
 	Route,
 } from "react-router-dom"
 import { MovieDetails } from './pages/MovieDetails/MovieDetails'
 import { MoviesDiscovery } from './pages/MoviesDiscovery/MoviesDiscovery'
+import { MoviesSection } from './pages/MoviesSection/MoviesSection'
+import { MoviesSearch } from './pages/MoviesSearch/MoviesSearch'
 
 const root = ReactDOM.createRoot(
 	document.getElementById('root') as HTMLElement
@@ -19,13 +22,23 @@ root.render(
 		<BrowserRouter>
 			<Routes>
 				<Route path="/" element={<App />}>
-					<Route path='/' element={<MoviesDiscovery />} />
-					<Route path="/movie/:id/:title" element={<MovieDetails />} />
-					<Route
-						path="*"
+					<Route path="/" element={<Navigate to="/discover" replace />} />
+					<Route path='/discover' element={<MoviesDiscovery />} />
+					<Route path='/discover/trending'
+						element={<MoviesSection section={'trending'} />}
+					/>
+					<Route path='/discover/latest'
+						element={<MoviesSection section={'latest'} />}
+					/>
+					<Route path='/discover/foryou'
+						element={<MoviesSection section={'foryou'} />}
+					/>
+					<Route path="/search/:id" element={<MoviesSearch />} />
+					<Route path="/movie/:id" element={<MovieDetails />} />
+					<Route path="*"
 						element={
 							<main style={{ padding: "1rem" }}>
-								<p>There's nothing here!</p>
+								<h1>There's nothing here!</h1>
 							</main>
 						}
 					/>
