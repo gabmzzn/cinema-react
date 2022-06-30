@@ -1,6 +1,7 @@
 import css from './Header.module.scss'
 import { Link, useNavigate } from 'react-router-dom'
 import { useEffect, useState } from 'react'
+import Input from '@mui/material/Input/Input'
 
 export const Header = () => {
 
@@ -23,8 +24,12 @@ export const Header = () => {
 					<Link to='/discover/'>
 						<h2>React Movies</h2>
 					</Link>
-					<div className={css.rating}>
-						<input type="search" onChange={e => setQuery(e.target.value)}
+					<div className={css.search}>
+						<Input
+							placeholder="Search for movies"
+							sx={{ color: 'white' }}
+							fullWidth
+							onChange={e => setQuery(e.target.value)}
 							onKeyPress={(e: any) => {
 								if (e.key === "Enter") {
 									e.preventDefault()

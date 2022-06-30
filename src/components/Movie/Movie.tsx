@@ -10,7 +10,7 @@ export interface MovieProps {
 export const Movie = ({ movie }: any) => {
 
 	const poster = movie.poster_path ?
-		`https://image.tmdb.org/t/p/w500${movie.poster_path}` :
+		`https://image.tmdb.org/t/p/w300${movie.poster_path}` :
 		'/images/movie_thumbnail.svg'
 
 	return (
