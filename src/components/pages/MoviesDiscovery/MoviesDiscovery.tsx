@@ -20,29 +20,49 @@ interface Movies {
 
 export const MoviesDiscovery = () => {
 
-	const [movies, setMovies] = useState<Movies>()
 
-	const fetchMovies = useCallback(async () => {
-		const trending = await fetch(`
+	const [movies, setMovies] = useState<Movies>()
+	const [popular, setPopular] = useState<any>()
+	const [latest, setLatest] = useState<any>()
+	const [loading, setLoading] = useState<number>(0)
+
+	useEffect(() => {
+		async function fetchPopularMovies() {
+			const popular = await fetch(`
 		https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}
 		&sort_by=popularity.desc
 		&include_adult=false
 		&page=1
 		`).then(r => r.json())
-		const latest = await fetch(`
+			setPopular(popular)
+			setLoading(n => n + 1)
+		}
+		fetchPopularMovies()
+	}, [])
+
+	useEffect(() => {
+		async function fetchLatestMovies() {
+			const latest = await fetch(`
 		https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}
 		&sort_by=release_date.desc&vote_count.gte=200
 		&include_adult=false
 		&page=1
 		`).then(r => r.json())
-		const movies = {
-			trending: trending.results.slice(0, 8),
-			latest: latest.results.slice(0, 4)
+			setLatest(latest)
+			setLoading(n => n + 1)
 		}
-		setMovies(movies)
+		fetchLatestMovies()
 	}, [])
 
-	useEffect(() => { fetchMovies() }, [fetchMovies])
+	useEffect(() => {
+		if (loading >= 2) {
+			setMovies({
+				trending: popular.results.slice(0, 8),
+				latest: latest.results.slice(0, 4)
+			})
+		}
+	}, [loading])
+
 
 	return (
 		<>
@@ -50,7 +70,7 @@ export const MoviesDiscovery = () => {
 				<h1>Popular Right Now 🔥</h1>
 			</Link>
 			<div className={css.main}>
-				{movies ?
+				{movies &&
 					movies.trending.map((movie: any) =>
 						<Link
 							to={`../movie/${movie.id}-${movie.title.replaceAll(' ', '-').toLowerCase()}`}
@@ -58,13 +78,13 @@ export const MoviesDiscovery = () => {
 						>
 							<Movie movie={movie} />
 						</Link>
-					) : <h1>Loading</h1>}
+					)}
 			</div>
 			<Link to={'latest/1'}>
 				<h1>Latest Releases🍿</h1>
 			</Link>
 			<div className={css.main}>
-				{movies ?
+				{movies &&
 					movies.latest.map((movie: any) =>
 						<Link
 							to={`../movie/${movie.id}-${movie.title.replaceAll(' ', '-').toLowerCase()}`}
@@ -72,7 +92,7 @@ export const MoviesDiscovery = () => {
 						>
 							<Movie movie={movie} />
 						</Link>
-					) : <h1>Loading</h1>}
+					)}
 			</div>
 			<Outlet />
 		</>

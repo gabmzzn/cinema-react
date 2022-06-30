@@ -64,7 +64,7 @@ export const MoviesSection = (props: { section: string, title: string, sortBy: s
 				/>
 			</div>
 			<div className={css.main}>
-				{movies && params.page && movies.length !== 0 ?
+				{movies && params.page && movies.length !== 0 &&
 					<>
 						{movies.map(movie =>
 							<Link
@@ -82,8 +82,7 @@ export const MoviesSection = (props: { section: string, title: string, sortBy: s
 								siblingCount={3} size='large'
 							/>
 						</div>
-					</>
-					: <h1>Loading</h1>}
+					</>}
 				{movies && movies.length === 0 && <h1>Oops! No movies found with your selected rating</h1>}
 			</div>
 			<Outlet />
