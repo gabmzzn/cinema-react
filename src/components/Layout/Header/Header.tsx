@@ -30,7 +30,7 @@ export const Header = () => {
 			<div className={css.navbar}>
 				<div className={css.content}>
 					<Link to='/discover/'>
-						<h1 className={css.logo}>REACT<LocalMoviesIcon />CINEMA</h1>
+						<h1 className={css.logo}>CINEMA<LocalMoviesIcon />REACT</h1>
 					</Link>
 					<div className={css.search}>
 						<Input
