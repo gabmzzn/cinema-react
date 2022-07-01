@@ -70,7 +70,7 @@ export const MovieDetails = () => {
 			<div className={css.cast}>
 				{movie.credits?.cast.slice(0, 10).map((act: any) => {
 					const img = act.profile_path ?
-						`https://image.tmdb.org/t/p/w500${act.profile_path}` :
+						`https://image.tmdb.org/t/p/w200${act.profile_path}` :
 						'https://www.themoviedb.org/assets/2/v4/glyphicons/basic/glyphicons-basic-4-user-grey-d8fe957375e70239d6abdd549fd7568c89281b2179b5f4470e2e12895792dfa5.svg'
 					return (
 						<div className={css.act}>

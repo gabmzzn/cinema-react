@@ -9,11 +9,11 @@ export const MovieOverview = ({ movie }: { movie: MovieSearch }) => {
 		vote_average, release_date, backdrop_path } = movie
 
 	const poster = poster_path ?
-		`https://image.tmdb.org/t/p/w500${poster_path}` :
+		`https://image.tmdb.org/t/p/w200${poster_path}` :
 		'/images/movie_thumbnail.svg'
 
 	const backdrop = backdrop_path ?
-		`https://image.tmdb.org/t/p/w500${backdrop_path}` :
+		`https://image.tmdb.org/t/p/w200${backdrop_path}` :
 		'/images/movie_thumbnail.svg'
 
 	const year = release_date?.split('-')[0]
