@@ -2,6 +2,8 @@ import { useParams } from "react-router-dom"
 import { useEffect, useState } from "react"
 import css from './MovieDetails.module.scss'
 import { MovieDetail } from "../../../interfaces/Movie"
+import { CircularProgress, Rating } from "@mui/material"
+import StarIcon from '@mui/icons-material/Star'
 
 const apiKey = process.env.REACT_APP_API_KEY
 
@@ -42,21 +44,31 @@ export const MovieDetails = () => {
 		return false
 	}
 
-	return <>
-		{movie && <>
-			<h2><b style={{ color: 'green' }}>{movie.original_title}</b> scored <b style={{ color: 'red' }}>{movie.vote_average}</b></h2>
-			<h5>{movie.overview}</h5>
-			{videoTrailer() &&
-				<iframe width="860" height="515" src={`https://www.youtube.com/embed/${trailer}`}
-					title={movie.original_title}
-					frameBorder="0"
-					allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-					allowFullScreen
-				/>
-			}
-			<img src={`https://image.tmdb.org/t/p/w500${movie.backdrop_path}`} width={'800px'} />
+	const poster = movie?.poster_path ?
+		`https://image.tmdb.org/t/p/w300${movie.poster_path}` :
+		'/images/movie_thumbnail.svg'
+
+	if (movie) {
+		return <div className={css.details}>
+			<div className={css.header}>
+				<h1>{movie.title} ({movie.release_date?.split('-')[0]})
+				</h1>
+				<h1><StarIcon fontSize='large' sx={{ color: 'darkorange' }} /> {movie.vote_average}</h1>
+			</div>
+
+			<div className={css.mainMedia}>
+				<img className={css.poster} src={poster} />
+				{videoTrailer() &&
+					<iframe width="900" height="400" src={`https://www.youtube.com/embed/${trailer}`}
+						title={movie.original_title}
+						frameBorder="0"
+						allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+						allowFullScreen style={{ borderRadius: '25px' }}
+					/>}
+			</div>
+			<h4>{movie.overview}</h4>
 			<div className={css.cast}>
-				{movie.credits?.cast.map((act: any) => {
+				{movie.credits?.cast.slice(0, 10).map((act: any) => {
 					const img = act.profile_path ?
 						`https://image.tmdb.org/t/p/w500${act.profile_path}` :
 						'https://www.themoviedb.org/assets/2/v4/glyphicons/basic/glyphicons-basic-4-user-grey-d8fe957375e70239d6abdd549fd7568c89281b2179b5f4470e2e12895792dfa5.svg'
@@ -64,15 +76,21 @@ export const MovieDetails = () => {
 						<div className={css.act}>
 							<div>
 								<h4>{act.name}</h4>
-								<h5>{act.character}</h5>
+								{/* <h5>{act.character}</h5> */}
 								<img src={img} width={'200px'} />
-								<h5>{act.known_for_department}</h5>
+								{/* <p>{act.known_for_department}</p> */}
 							</div>
 						</div>
 					)
 				}
 				)}
 			</div>
-		</>}
-	</>
+			<div className={css.backdrops}>
+				<img className={css.backdrop1} src={`https://image.tmdb.org/t/p/w500${movie.backdrop_path}`} />
+			</div>
+
+		</div>
+	}
+
+	return <CircularProgress size={'200px'} />
 }

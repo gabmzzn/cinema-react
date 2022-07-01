@@ -1,12 +1,35 @@
 .movie {
 	display: flex;
-	margin: 10px;
+	margin: 15px;
+	width: 480px;
 	border-radius: 12px;
-	box-shadow: 0 0 10px rgba(0, 0, 0, 0.644);
+	overflow: hidden;
+	background-size: cover;
+	box-shadow: 0 0 10px rgba(0, 0, 0, 1);
 
 	img {
-		width: 100px;
+		width: 150px;
 		margin-right: 20px;
 		border-radius: 12px 0 0 12px;
+	}
+
+	span {
+		font-size: smaller;
+	}
+}
+
+.header,
+.vote {
+	display: flex;
+	align-items: center;
+}
+
+.backdrop {
+	display: flex;
+	backdrop-filter: blur(20px);
+	background-color: rgba(0, 0, 0, 0.6);
+
+	a {
+		display: flex;
 	}
 }

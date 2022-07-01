@@ -79,7 +79,7 @@ export const MoviesSearch = () => {
 				{movies && params.page ?
 					<>
 						{movies.map(movie =>
-							<MovieOverview movie={movie} />
+							<MovieOverview key={movie.id} movie={movie} />
 						)}
 						<div className={css.pagination}>
 							<Pagination siblingCount={3} size='large' count={totalPages} page={parseInt(params.page)} onChange={handlePageChange} />

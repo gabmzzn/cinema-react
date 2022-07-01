@@ -18,7 +18,7 @@ export interface MovieDetail {
 	original_title?: string
 	overview?: string
 	popularity?: number
-	vote_average?: number
+	vote_average: number
 	vote_count?: number
 	release_date?: string
 	original_language?: string
