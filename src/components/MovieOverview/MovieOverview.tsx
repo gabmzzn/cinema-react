@@ -18,6 +18,8 @@ export const MovieOverview = ({ movie }: { movie: MovieSearch }) => {
 
 	const year = release_date?.split('-')[0]
 
+	const vote = vote_average == 0 ? '' : vote_average
+
 	return (
 		<div className={css.movie} style={{ backgroundImage: `url(${backdrop})` }}>
 			<div className={css.backdrop}>
@@ -34,7 +36,7 @@ export const MovieOverview = ({ movie }: { movie: MovieSearch }) => {
 						key={movie.id}
 					>
 						<div className={css.header}>
-							<h3>{title} ({year})</h3><h3 className={css.vote}><StarIcon fontSize='medium' sx={{ color: 'darkorange' }} /> {movie.vote_average}</h3>
+							<h3>{title} ({year})</h3><h3 className={css.vote}><StarIcon fontSize='medium' sx={{ color: 'darkorange' }} /> {vote}</h3>
 						</div>
 					</Link>
 					<span>{overview?.substr(0, 200)} [...]</span>

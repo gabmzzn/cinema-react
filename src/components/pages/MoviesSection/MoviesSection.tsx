@@ -66,14 +66,7 @@ export const MoviesSection = (props: { section: string, title: string, sortBy: s
 			<div className={css.main}>
 				{movies && params.page && movies.length !== 0 &&
 					<>
-						{movies.map(movie =>
-							<Link
-								to={`../movie/${movie.id}-${movie.title.replaceAll(' ', '-').toLowerCase()}`}
-								key={movie.id}
-							>
-								<Movie movie={movie} />
-							</Link>
-						)}
+						{movies.map(movie => <Movie key={movie.id} movie={movie} />)}
 						<div className={css.pagination}>
 							<Pagination
 								page={parseInt(params.page)}

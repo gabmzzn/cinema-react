@@ -6,6 +6,7 @@ import css from './MoviesSearch.module.scss'
 import Pagination from '@mui/material/Pagination'
 import { useNavigate, Outlet, useParams } from 'react-router-dom'
 import CircularProgress from "@mui/material/CircularProgress/CircularProgress"
+import { LoadingScreen } from "../../Layout/LoadingScreen/LoadingScreen"
 
 interface Movie {
 	id: number
@@ -85,7 +86,7 @@ export const MoviesSearch = () => {
 							<Pagination siblingCount={3} size='large' count={totalPages} page={parseInt(params.page)} onChange={handlePageChange} />
 						</div>
 					</>
-					: <CircularProgress />}
+					: <LoadingScreen />}
 				{movies?.length == 0 && <h1>No movies found</h1>}
 			</div>
 			<Outlet />

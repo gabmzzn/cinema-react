@@ -9,7 +9,6 @@ export const Header = () => {
 	const [query, setQuery] = useState<string | undefined>(undefined)
 
 	useEffect(() => {
-		console.log(query)
 		if (query !== undefined) {
 			const timer = setTimeout(() => {
 				query !== '' ? navigate(`/search/${query}/1`) : navigate('/discover/')
@@ -19,8 +18,9 @@ export const Header = () => {
 	}, [query])
 
 	function handleQuery(query: string, key: boolean) {
-		query == '' && navigate('/discover/')
-		if (query.trim().length !== 0) {
+		if (query == '') {
+			setQuery(query)
+		} else if (query.trim().length > 0) {
 			key ? setQuery(query) : navigate(`/search/${query}/1`)
 		}
 	}
@@ -34,7 +34,7 @@ export const Header = () => {
 					</Link>
 					<div className={css.search}>
 						<Input
-							placeholder="Search for movies"
+							placeholder="Search for your favorites movies"
 							sx={{ color: 'white' }}
 							fullWidth
 							onChange={e => handleQuery(e.target.value, true)}
