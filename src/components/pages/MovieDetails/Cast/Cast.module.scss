@@ -1,0 +1,20 @@
+.cast {
+	display: flex;
+	max-width: 1100px;
+	overflow-x: scroll;
+	justify-content: flex-start;
+	z-index: 1;
+
+	img {
+		border-radius: 12px;
+	}
+}
+
+.act {
+	padding: 10px;
+
+	p {
+		font-size: 12px;
+		margin: 8px auto;
+	}
+}

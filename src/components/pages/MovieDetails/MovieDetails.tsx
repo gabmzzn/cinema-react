@@ -2,22 +2,32 @@ import { useParams } from "react-router-dom"
 import { useEffect, useState } from "react"
 import css from './MovieDetails.module.scss'
 import { MovieDetail } from "../../../interfaces/Movie"
-import { CircularProgress, Rating } from "@mui/material"
+import PlayArrowRoundedIcon from '@mui/icons-material/PlayArrowRounded'
 import StarIcon from '@mui/icons-material/Star'
+import Chip from '@mui/material/Chip'
 import { LoadingScreen } from "../../Layout/LoadingScreen/LoadingScreen"
 import { Movie } from "../../Movie/Movie"
+import Button from '@mui/material/Button'
+import Modal from "@mui/material/Modal/Modal"
+import Fade from "@mui/material/Fade/Fade"
+import { CircularProgress, LinearProgress } from "@mui/material"
+import { MoviesSection } from "../MoviesSection/MoviesSection"
+import { Cast } from "./Cast/Cast"
+import { createJSDocCallbackTag } from "typescript"
+
 
 const apiKey = process.env.REACT_APP_API_KEY
 
 
 export const MovieDetails = () => {
 
-	const params = useParams()
-	const { id, title } = params
+	let params = useParams()
+	const { id } = params
 
 	const [movie, setMovie] = useState<MovieDetail>()
-	const [similars, setSimilars] = useState<any>()
 	const [load, setLoad] = useState(false)
+
+	const [trailer, setTrailer] = useState()
 
 	useEffect(() => {
 		setLoad(false)
@@ -27,92 +37,98 @@ export const MovieDetails = () => {
 			?api_key=${apiKey}
 			&language=en-US
 			&append_to_response=videos,credits
-			`)
-				.then(r => r.json())
+			`).then(r => r.json())
+
+			//This tries to determine which video is a movie trailer
+			//If we dont get a 'trailer' keyword we stick to the first video
+			if (movie.videos.results.length > 0) {
+				const videoWithTrailer = movie.videos.results.find((vid: any) =>
+					vid.name.includes('trailer') || vid.name.includes('Trailer')
+				)
+				setTrailer(videoWithTrailer ? videoWithTrailer.key : movie.videos.results[0].key)
+			}
+
 			setMovie(movie)
-		}
-		async function fetchSimilars() {
-			const similars = await fetch(`
-			https://api.themoviedb.org/3/movie/${id}/
-			similar?api_key=${apiKey}
-			&language=en-US
-			`)
-				.then(r => r.json())
-			setSimilars(similars.results)
 			setLoad(true)
 		}
 		fetchMovie()
-		fetchSimilars()
 	}, [id])
-
-	let trailer = undefined
-	function videoTrailer() {
-		//This tries to determine which video is a movie trailer
-		//If we dont get a 'trailer' keyword we stick to the first video
-		const videos = movie && movie.videos?.results
-		if (videos.length > 0) {
-			const videoName = videos.find((vid: any) =>
-				vid.name.includes('trailer') || vid.name.includes('Trailer')
-			)
-			trailer = videoName ? videoName.key : videos[0].key
-			return true
-		}
-		return false
-	}
 
 	const poster = movie?.poster_path ?
 		`https://image.tmdb.org/t/p/w300${movie.poster_path}` :
 		'/images/movie_thumbnail.svg'
 
-	const default_thumb = 'https://www.themoviedb.org/assets/2/v4/glyphicons/basic/glyphicons-basic-4-user-grey-d8fe957375e70239d6abdd549fd7568c89281b2179b5f4470e2e12895792dfa5.svg'
+	const [modalOpen, setModalOpen] = useState(false)
 
-	if (movie && similars && load) {
-		return <div className={css.details}>
-			<div className={css.header}>
-				<h1>{movie.title} ({movie.release_date?.split('-')[0]})
-				</h1>
-				<h1><StarIcon fontSize='large' sx={{ color: 'darkorange' }} /> {movie.vote_average}</h1>
-			</div>
-			<div className={css.mainMedia}>
-				<img className={css.poster} src={poster} />
-				{videoTrailer() &&
-					<img className={css.trailer} src={`https://img.youtube.com/vi/${trailer}/maxresdefault.jpg`} />
-				}
-			</div>
-			<div>
-				<h2>Sinopsis</h2>
-				<h4>{movie.overview}</h4>
-			</div>
-			<h1>Cast</h1>
-			<div className={css.cast}>
-				<div className={css.castGradient}>				</div>
-				{movie.credits?.cast.map((act: any, i: number) => {
-					const img = act.profile_path ?
-						`https://image.tmdb.org/t/p/w200${act.profile_path}` :
-						default_thumb
-					return (
-						<div className={css.act} key={i}>
-							<div>
-								<img src={img} width={'130px'} />
-								<p>{act.name}</p>
-								<p>{act.character}</p>
+	const [ready, setReady] = useState(true)
+	const handleLoad = () => setReady(true)
+
+	if (movie && load) {
+		return (
+			<div className={css.details}>
+				<Modal
+					sx={{ overflowY: 'scroll' }}
+					open={modalOpen}
+					disableAutoFocus={true}
+					aria-labelledby="modal-modal-title"
+					aria-describedby="modal-modal-description"
+					hideBackdrop
+				>
+					<Fade in={modalOpen}>
+						<div className={css.trailerModal} onClick={() => setModalOpen(false)}>
+							<iframe width="937" height="537" src={`https://www.youtube.com/embed/${trailer}?modestbranding=1&autohide=1&showinfo=0&autoplay=1`}
+								className={css.trailerVideo}
+								title={movie.original_title}
+								frameBorder="0"
+								allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+								allowFullScreen
+							/>
+							<div className={css.closeButton}>
+								<Button variant="outlined">CLOSE VIDEO TRAILER</Button>
 							</div>
 						</div>
-					)
-				}
-				)}
-			</div>
-			<div>
-				<h1>Similar movies</h1>
-				<div className={css.similar}>
-					{similars.map((movie: any) => <Movie key={movie.id} movie={movie} />)}
+					</Fade>
+				</Modal>
+				<div className={css.header}>
+					<h1>{movie.title} ({movie.release_date?.split('-')[0]})</h1>
+					<h1><StarIcon fontSize='large' sx={{ color: 'darkorange' }} /> {movie.vote_average}</h1>
 				</div>
-			</div>
-			<div className={css.backdrops}>
-				<img className={css.backdrop1} src={`https://image.tmdb.org/t/p/w500${movie.backdrop_path}`} />
-			</div>
-
-		</div>
+				<div className={css.mainMedia}>
+					<img className={css.poster} src={poster} />
+					<div style={{ marginLeft: '35px' }}>
+						<div style={{ display: 'flex' }}>
+							<div className={css.trailer} onClick={() => setModalOpen(true)}>
+								<div className={css.playButton}>
+									<PlayArrowRoundedIcon sx={{ fontSize: '6em' }} />
+								</div>
+								<img className={css.trailerImage} src={`https://i.ytimg.com/vi/${trailer}/0.jpg`} />
+							</div>
+						</div>
+						<div className={css.info}>
+							<Button variant="contained">BUY TICKETS</Button>
+							{movie.genres.map((g, i) => <Chip key={i} color="primary" label={g.name} />)}
+							<h4>Runtime: {movie.runtime} mins ⏱️</h4>
+						</div>
+					</div>
+				</div>
+				<div>
+					<h2>Sinopsis</h2>
+					<h4>{movie.overview}</h4>
+				</div>
+				<Cast movie={movie} />
+				<MoviesSection
+					mini={20}
+					overflow
+					isLoaded={handleLoad}
+					section={'similar'}
+					movieId={movie.id}
+					title={'Similar movies to ' + movie.title}
+					sortBy={'popularity.desc'}
+				/>
+				<div className={css.backdrops}>
+					<img className={css.backdrop1} src={`https://image.tmdb.org/t/p/w200${movie.backdrop_path}`} />
+				</div>
+			</div>)
 	}
 
 	return <LoadingScreen />

@@ -5,15 +5,18 @@ import { Outlet, Link, useParams, useNavigate } from "react-router-dom"
 import MovieRating from '../../Layout/MovieRating/MovieRating'
 import Pagination from '@mui/material/Pagination'
 import { MovieSearch } from '../../../interfaces/Movie'
+import { TopPopularMovie } from './TopPopularMovie/TopPopularMovie'
+import { LoadingScreen } from '../../Layout/LoadingScreen/LoadingScreen'
+import Button from '@mui/material/Button/Button'
 
 const apiKey = process.env.REACT_APP_API_KEY
 
-export const MoviesSection = (props: { section: string, title: string, sortBy: string }) => {
+export const MoviesSection = (props: { section: string, title: string, sortBy: string, mini?: number, top?: boolean, isLoaded?: any, movieId?: number, overflow?: boolean }) => {
 
 	let params = useParams()
 	let navigate = useNavigate()
 
-	const { section, title, sortBy } = props
+	const { section, title, sortBy, mini, isLoaded, top, movieId, overflow } = props
 
 	const [fetchedMovies, setFetchedMovies] = useState<MovieSearch[] | undefined>()
 	const [movies, setMovies] = useState<MovieSearch[] | undefined>()
@@ -22,15 +25,18 @@ export const MoviesSection = (props: { section: string, title: string, sortBy: s
 	useEffect(() => {
 		async function fetchMovies() {
 			const movies = await fetch(`
-		https://api.themoviedb.org/3/discover/movie?api_key=${apiKey}
+		https://api.themoviedb.org/3/
+		${section == 'similar' ? `movie/${movieId}/similar` : 'discover/movie'}
+		?api_key=${apiKey}
 		&include_adult=false
 		&language=en-US
-		&page=${params.page}
+		${mini ? '' : `&page=${params.page}`}
 		&sort_by=${sortBy}
 		`).then(r => r.json())
 			setMovies(movies.results)
 			setFetchedMovies(movies.results)
 			setTotalPages(movies.total_pages >= 500 ? 500 : movies.total_pages)
+			isLoaded()
 		}
 		fetchMovies()
 	}, [params.page, sortBy])
@@ -54,31 +60,50 @@ export const MoviesSection = (props: { section: string, title: string, sortBy: s
 		setRating(null)
 	}
 
-	return (
-		<>
-			<div className={css.header}>
-				<h1>{title}</h1>
-				<MovieRating
-					value={rating}
-					handleChange={(e: number, value: number) => setRating(value)}
-				/>
-			</div>
-			<div className={css.main}>
-				{movies && params.page && movies.length !== 0 &&
-					<>
-						{movies.map(movie => <Movie key={movie.id} movie={movie} />)}
-						<div className={css.pagination}>
-							<Pagination
-								page={parseInt(params.page)}
-								onChange={handlePageChange}
-								count={totalPages}
-								siblingCount={3} size='large'
-							/>
-						</div>
-					</>}
-				{movies && movies.length === 0 && <h1>Oops! No movies found with your selected rating</h1>}
-			</div>
-			<Outlet />
-		</>
-	)
+	if (movies && mini) {
+		return (
+			<>
+				{top && <TopPopularMovie movie={movies[0]} />}
+				<h1 className={css.title}>
+					{title}&nbsp;
+					<Link to={`${section}/1`}>
+						<Button variant="outlined">View All ❯</Button>
+					</Link>
+				</h1>
+				<div className={overflow ? css.overflowMode : css.main}>
+					{movies.slice(top ? 1 : 0, top ? mini + 1 : mini).map((movie) => <Movie key={movie.id} movie={movie} />)}
+				</div>
+			</>)
+	}
+
+	if (movies) {
+		return (
+			<>
+				<div className={css.header}>
+					<h1>{title}</h1>
+					<MovieRating
+						value={rating}
+						handleChange={(e: number, value: number) => setRating(value)}
+					/>
+				</div>
+				<div className={css.main}>
+					{movies && params.page && movies.length !== 0 &&
+						<>
+							{movies.map(movie => <Movie key={movie.id} movie={movie} />)}
+							<div className={css.pagination}>
+								<Pagination
+									page={parseInt(params.page)}
+									onChange={handlePageChange}
+									count={totalPages}
+									siblingCount={3} size='large'
+								/>
+							</div>
+						</>}
+					{movies && movies.length === 0 && <h1>Oops! No movies found with your selected rating</h1>}
+				</div>
+				<Outlet />
+			</>)
+	}
+
+	return <LoadingScreen />
 }

@@ -3,6 +3,7 @@ import { Link, useNavigate } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import Input from '@mui/material/Input/Input'
 import LocalMoviesIcon from '@mui/icons-material/LocalMovies'
+import Button from '@mui/material/Button/Button'
 export const Header = () => {
 
 	let navigate = useNavigate()
@@ -29,7 +30,7 @@ export const Header = () => {
 		<div className={css.header}>
 			<div className={css.navbar}>
 				<div className={css.content}>
-					<Link to='/discover/'>
+					<Link to='/discover/' onClick={() => setQuery('')}>
 						<h1 className={css.logo}>CINEMA<LocalMoviesIcon />REACT</h1>
 					</Link>
 					<div className={css.search}>
@@ -37,6 +38,7 @@ export const Header = () => {
 							placeholder="Search for your favorites movies"
 							sx={{ color: 'white' }}
 							fullWidth
+							value={query}
 							onChange={e => handleQuery(e.target.value, true)}
 							onKeyPress={(e: any) => {
 								if (e.key === "Enter") {
@@ -45,6 +47,10 @@ export const Header = () => {
 								}
 							}}
 						/>
+					</div>
+					<div className={css.buttons}>
+						<Button variant="outlined">LOG IN</Button>
+						<Button variant="contained">REGISTER</Button>
 					</div>
 				</div>
 			</div>

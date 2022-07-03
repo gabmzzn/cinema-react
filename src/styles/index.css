@@ -40,10 +40,6 @@ a {
 	color: white !important;
 }
 
-.MuiInput-root:after {
-	border-bottom: 2px solid darkorange !important
-}
-
 .MuiInput-root:before {
 	border-bottom: 1px solid rgba(255, 255, 255, 0.05) !important;
 }
@@ -52,8 +48,8 @@ a {
 	background-color: rgb(66, 66, 66) !important;
 }
 
-.MuiLinearProgress-bar {
-	background-color: darkorange !important;
+.MuiButton-root {
+	border-radius: 50px !important;
 }
 
 code {
@@ -77,6 +73,6 @@ code {
 }
 
 ::-webkit-scrollbar {
-	width: 10px;
+	width: 0px;
 	height: 10px;
 }

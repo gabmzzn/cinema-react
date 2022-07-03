@@ -1,22 +1,13 @@
 import { useState, useEffect } from "react"
 import MovieRating from "../../Layout/MovieRating/MovieRating"
 import { Movie } from "../../Movie/Movie"
-import { MovieOverview } from "../../MovieOverview/MovieOverview"
+import { MovieOverview } from "./MovieOverview/MovieOverview"
 import css from './MoviesSearch.module.scss'
 import Pagination from '@mui/material/Pagination'
 import { useNavigate, Outlet, useParams } from 'react-router-dom'
 import CircularProgress from "@mui/material/CircularProgress/CircularProgress"
 import { LoadingScreen } from "../../Layout/LoadingScreen/LoadingScreen"
-
-interface Movie {
-	id: number
-	title: string
-	overview: string
-	poster_path: string
-	popularity: number
-	vote_average: number
-	vote_count: number
-}
+import { MovieDiscover } from '../../../interfaces/Movie'
 
 const apiKey = process.env.REACT_APP_API_KEY
 
@@ -25,8 +16,8 @@ export const MoviesSearch = () => {
 	let params = useParams()
 	let navigate = useNavigate()
 
-	const [fetchedMovies, setFetchedMovies] = useState<Movie[] | undefined>()
-	const [movies, setMovies] = useState<Movie[] | undefined>()
+	const [fetchedMovies, setFetchedMovies] = useState<MovieDiscover[] | undefined>()
+	const [movies, setMovies] = useState<MovieDiscover[] | undefined>()
 	const [totalPages, setTotalPages] = useState<number>()
 
 	useEffect(() => {
@@ -38,7 +29,7 @@ export const MoviesSearch = () => {
 			&page=${params.page}
 			`).then(r => r.json())
 			const sortedMovies = movies.results
-				.sort((a: Movie, b: Movie) =>
+				.sort((a: MovieDiscover, b: MovieDiscover) =>
 					b.vote_count - a.vote_count
 				)
 			setMovies(sortedMovies)

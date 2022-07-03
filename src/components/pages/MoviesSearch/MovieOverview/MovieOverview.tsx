@@ -1,9 +1,9 @@
 import css from './MovieOverview.module.scss'
-import { MovieSearch } from '../../interfaces/Movie'
+import { MovieDiscover } from '../../../../interfaces/Movie'
 import { Link } from 'react-router-dom'
 import StarIcon from '@mui/icons-material/Star'
 
-export const MovieOverview = ({ movie }: { movie: MovieSearch }) => {
+export const MovieOverview = ({ movie }: { movie: MovieDiscover }) => {
 
 	const { poster_path, title, overview,
 		vote_average, release_date, backdrop_path } = movie
