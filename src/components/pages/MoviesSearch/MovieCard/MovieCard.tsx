@@ -1,9 +1,9 @@
-import css from './MovieOverview.module.scss'
+import css from './MovieCard.module.scss'
 import { MovieDiscover } from '../../../../interfaces/Movie'
 import { Link } from 'react-router-dom'
 import StarIcon from '@mui/icons-material/Star'
 
-export const MovieOverview = ({ movie }: { movie: MovieDiscover }) => {
+export const MovieCard = ({ movie }: { movie: MovieDiscover }) => {
 
 	const { poster_path, title, overview,
 		vote_average, release_date, backdrop_path } = movie
@@ -22,26 +22,23 @@ export const MovieOverview = ({ movie }: { movie: MovieDiscover }) => {
 
 	return (
 		<div className={css.movie} style={{ backgroundImage: `url(${backdrop})` }}>
-			<div className={css.backdrop}>
-				<Link
-					to={`../movie/${movie.id}-${movie.title.replaceAll(' ', '-').toLowerCase()}`}
-					key={movie.id}
-				>
+			<Link
+				to={`../movie/${movie.id}-${movie.title.replaceAll(' ', '-').toLowerCase()}`}
+				key={movie.id}
+			>
+				<div className={css.backdrop}>
 					<img
 						src={poster}
-						alt={title} /></Link>
-				<div style={{ paddingRight: '10px' }}>
-					<Link
-						to={`../movie/${movie.id}-${movie.title.replaceAll(' ', '-').toLowerCase()}`}
-						key={movie.id}
-					>
+						alt={title} />
+					<div style={{ paddingRight: '10px' }}>
+
 						<div className={css.header}>
 							<h3>{title} ({year})</h3><h3 className={css.vote}><StarIcon fontSize='medium' sx={{ color: 'darkorange' }} /> {vote}</h3>
 						</div>
-					</Link>
-					<span>{overview?.substr(0, 200)} [...]</span>
-				</div >
-			</div>
+						<span>{overview?.substr(0, 200)} [...]</span>
+					</div >
+				</div>
+			</Link >
 		</div >
 	)
 }

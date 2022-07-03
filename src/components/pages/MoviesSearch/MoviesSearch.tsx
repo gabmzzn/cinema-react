@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react"
 import MovieRating from "../../Layout/MovieRating/MovieRating"
 import { Movie } from "../../Movie/Movie"
-import { MovieOverview } from "./MovieOverview/MovieOverview"
+import { MovieCard } from "./MovieCard/MovieCard"
 import css from './MoviesSearch.module.scss'
 import Pagination from '@mui/material/Pagination'
 import { useNavigate, Outlet, useParams } from 'react-router-dom'
@@ -71,7 +71,7 @@ export const MoviesSearch = () => {
 				{movies && params.page ?
 					<>
 						{movies.map(movie =>
-							<MovieOverview key={movie.id} movie={movie} />
+							<MovieCard key={movie.id} movie={movie} />
 						)}
 						<div className={css.pagination}>
 							<Pagination siblingCount={3} size='large' count={totalPages} page={parseInt(params.page)} onChange={handlePageChange} />

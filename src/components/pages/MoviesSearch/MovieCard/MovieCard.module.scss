@@ -6,6 +6,8 @@
 	overflow: hidden;
 	background-size: cover;
 	box-shadow: 0 0 10px rgba(0, 0, 0, 1);
+	border: 2px solid rgb(34, 34, 34);
+	transition: all 0.3s;
 
 	img {
 		width: 150px;
@@ -16,6 +18,16 @@
 	span {
 		font-size: smaller;
 	}
+}
+
+.movie:hover {
+	border: 2px solid darkorange;
+	box-shadow: 0 0 25px darkorange;
+}
+
+.movie:active {
+	border: 2px solid rgb(255, 198, 128);
+	transition: all 0s;
 }
 
 .header,
