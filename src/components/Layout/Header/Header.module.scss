@@ -43,8 +43,13 @@
 	}
 
 	input::placeholder {
-		color: rgb(150, 150, 150);
+		color: rgb(140, 140, 140);
 		font-style: italic !important;
+		transition: all 0.2s;
+	}
+
+	input:focus::placeholder {
+		color: transparent;
 	}
 }
 

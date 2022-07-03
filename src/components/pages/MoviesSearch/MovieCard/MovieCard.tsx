@@ -27,10 +27,12 @@ export const MovieCard = ({ movie }: { movie: MovieDiscover }) => {
 				to={movieLink}
 				key={movie.id}
 			>
-				<div className={css.backdrop}>
-					<img
-						src={poster}
-						alt={title} />
+				<div className={css.content}>
+					<div className={css.poster}>
+						<img
+							src={poster}
+							alt={title} />
+					</div>
 					<div style={{ paddingRight: '10px' }}>
 						<div className={css.header}>
 							<h3>{title} ({year})</h3>

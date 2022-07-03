@@ -1,0 +1,57 @@
+.mainMedia {
+	display: flex;
+	align-items: flex-start;
+	justify-content: space-between;
+
+	.playButton {
+		position: absolute;
+		padding: 4px 5px 0 5px;
+		border-radius: 50%;
+		background-color: rgba(0, 0, 0, 0.75);
+	}
+
+	.trailer {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		cursor: pointer;
+
+		img {
+			object-fit: cover;
+		}
+	}
+
+	.trailerImage {
+		border-radius: 15px;
+		width: 740px;
+		height: 397px;
+		box-shadow: 0 0 25px rgba(0, 0, 0, 0.4);
+	}
+
+	.poster {
+		border-radius: 15px;
+		height: 475px;
+		box-shadow: 0 0 25px rgba(0, 0, 0, 0.3);
+	}
+}
+
+.runtime {
+	font-size: 0.85em !important;
+	font-weight: bold;
+}
+
+.info {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	flex-wrap: wrap;
+	margin-top: 20px;
+
+	button {
+		padding: 10px 20px 9px;
+	}
+
+	svg {
+		margin: 0 0 3px 5px;
+	}
+}

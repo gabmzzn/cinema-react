@@ -1,5 +1,5 @@
 .title {
-	font-family: 'Thunder';
+	font-family: 'Thunder', sans-serif;
 	font-size: 6em;
 }
 
@@ -14,6 +14,7 @@
 .topPoster {
 	img {
 		width: 18em !important;
+		height: 27em !important;
 	}
 }
 
@@ -45,7 +46,8 @@
 .backdrops {
 	position: absolute;
 	opacity: 45%;
-	background-size: cover;
+	// background-size: cover;
+	background-size: 100%;
 	top: 4.5em;
 	left: 0;
 	z-index: -50;

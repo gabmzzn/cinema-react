@@ -10,22 +10,22 @@ export const MoviesDiscovery = () => {
 
 	const handleLoad = () => setReady(v => v + 1)
 
-	return (
+	return (<>
+		{ready < 3 && <LoadingScreen />}
 		<div className={css.discovery}>
-			{ready < 3 && <LoadingScreen />}
 			<MoviesSection
 				top
 				mini={10}
 				isLoaded={handleLoad}
 				section={'popular'}
-				title={'Most popular movies of the moment 🔥'}
+				title={'Most popular movies at our theatres 🍿'}
 				sortBy={'popularity.desc'}
 			/>
 			<MoviesSection
 				mini={10}
 				section={'latest'}
 				isLoaded={handleLoad}
-				title={'Latest Releases of the month🍿'}
+				title={'Latest releases of the month 📽️'}
 				sortBy={'release_date.desc&vote_count.gte=20'}
 			/>
 			<MoviesSection
@@ -36,6 +36,7 @@ export const MoviesDiscovery = () => {
 				sortBy={'vote_count.desc&vote_count.gte=20'}
 			/>
 			<Outlet />
-		</div>)
+		</div>
+	</>)
 
 }

@@ -24,7 +24,8 @@ export const Movie = ({ movie }: any) => {
 				{/* <h3>{title}</h3> */}
 				<img
 					src={poster}
-					alt={movie.title} />
+					alt={movie.title}
+				/>
 				{/* <p>{overview}</p> */}
 				{/* <h2><b>{rating}</b></h2> */}
 			</div>

@@ -1,0 +1,9 @@
+
+export const Overview = (movie: any) => {
+	return (
+		<div style={{ marginBottom: '50px' }}>
+			<h1>Sinopsis</h1>
+			<h3 style={{ fontWeight: '400' }}>{movie.overview}</h3>
+		</div>
+	)
+}

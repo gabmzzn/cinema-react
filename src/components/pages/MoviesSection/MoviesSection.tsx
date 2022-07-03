@@ -109,5 +109,7 @@ export const MoviesSection = (props: { section: string, title: string, sortBy: s
 			</div>)
 	}
 
+	if (mini) return null
+
 	return <LoadingScreen />
 }

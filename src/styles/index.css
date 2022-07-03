@@ -2,11 +2,7 @@
 	font-family: 'Thunder';
 	font-style: normal;
 	src: url('../../public/fonts/Thunder-BoldLC.woff2') format('woff2');
-	src: local(''),
-		url('../../public/fonts/Thunder-BoldLC.woff2') format('woff2'),
 }
-
-@import url('https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,400;0,500;0,700;1,400&display=swap');
 
 html {
 	background-color: rgb(11, 10, 10);
@@ -15,8 +11,7 @@ html {
 
 body {
 	margin: 0;
-	font-family: 'Roboto',
-		sans-serif;
+	font-family: 'Roboto', sans-serif;
 	-webkit-font-smoothing: antialiased;
 	-moz-osx-font-smoothing: grayscale;
 	color: rgb(233, 233, 233);
@@ -53,11 +48,20 @@ a {
 }
 
 .MuiButton-outlined {
+	border: 2px solid rgb(177, 97, 0) !important;
 	background-color: rgba(10, 10, 10, 0.5) !important;
 }
 
 .MuiButton-outlined:hover {
-	background-color: rgba(10, 10, 10, 0.65) !important;
+	background-color: rgba(61, 33, 0, 0.8) !important;
+	border: 2px solid rgb(216, 119, 0) !important;
+}
+
+.MuiChip-outlined {
+	margin: 15px 0;
+	color: rgb(245, 245, 245) !important;
+	border: 2px solid rgb(102, 102, 102) !important;
+	background-color: rgba(10, 10, 10, 0.5) !important;
 }
 
 code {
@@ -65,8 +69,7 @@ code {
 		monospace;
 }
 
-/* Scrollbar consistency */
-
+/* Scrollbar  */
 ::-webkit-scrollbar-thumb {
 	background: rgba(100, 100, 100, 0.7);
 	border-radius: 5px;
