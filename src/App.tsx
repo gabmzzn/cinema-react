@@ -1,7 +1,6 @@
 import './styles/App.css'
-import { MoviesDiscovery } from './components/pages/MoviesDiscovery/MoviesDiscovery'
 import { Header } from './components/Layout/Header/Header'
-import { Outlet, Link } from "react-router-dom"
+import { Outlet } from "react-router-dom"
 import ThemeProvider from '@mui/material/styles/ThemeProvider'
 import createTheme from '@mui/material/styles/createTheme'
 import { Footer } from './components/Layout/Footer/Footer'

@@ -1,18 +1,30 @@
 import React from 'react'
+import { useEffect } from "react"
+import { useLocation } from "react-router-dom"
 import ReactDOM from 'react-dom/client'
 import './styles/index.css'
 import App from './App'
 import reportWebVitals from './tests/reportWebVitals'
+import { MovieDetails } from './components/pages/MovieDetails/MovieDetails'
+import { MoviesDiscovery } from './components/pages/MoviesDiscovery/MoviesDiscovery'
+import { MoviesSection } from './components/pages/MoviesSection/MoviesSection'
+import { MoviesSearch } from './components/pages/MoviesSearch/MoviesSearch'
 import {
 	BrowserRouter,
 	Routes,
 	Navigate,
 	Route,
 } from "react-router-dom"
-import { MovieDetails } from './components/pages/MovieDetails/MovieDetails'
-import { MoviesDiscovery } from './components/pages/MoviesDiscovery/MoviesDiscovery'
-import { MoviesSection } from './components/pages/MoviesSection/MoviesSection'
-import { MoviesSearch } from './components/pages/MoviesSearch/MoviesSearch'
+
+// This scrolls to top whenever there's a rute change
+export function ScrollToTop() {
+	const { pathname } = useLocation()
+	useEffect(() => {
+		window.scrollTo(0, 0)
+	}, [pathname])
+
+	return null
+}
 
 const root = ReactDOM.createRoot(
 	document.getElementById('root') as HTMLElement
@@ -20,6 +32,7 @@ const root = ReactDOM.createRoot(
 root.render(
 	<React.StrictMode>
 		<BrowserRouter>
+			<ScrollToTop />
 			<Routes>
 				<Route path="/" element={<App />}>
 					<Route path="/" element={<Navigate to="/discover/" replace />} />

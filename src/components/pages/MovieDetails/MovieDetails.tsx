@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom"
+import { useLocation, useParams } from "react-router-dom"
 import { useEffect, useState } from "react"
 import css from './MovieDetails.module.scss'
 import { MovieDetail } from "../../../interfaces/Movie"
@@ -20,6 +20,8 @@ export const MovieDetails = () => {
 	const [load, setLoad] = useState(false)
 
 	const [trailer, setTrailer] = useState()
+
+	const { pathname } = useLocation()
 
 	useEffect(() => {
 		setLoad(false)
@@ -45,7 +47,7 @@ export const MovieDetails = () => {
 			setLoad(true)
 		}
 		fetchMovie()
-	}, [id])
+	}, [id, pathname])
 
 	if (movie && load) {
 		return (

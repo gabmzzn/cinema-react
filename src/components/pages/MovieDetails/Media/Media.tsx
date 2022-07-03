@@ -22,14 +22,14 @@ export const Media = (movie: any) => {
 				onClickModalClose={() => setModalOpen(false)}
 			/>
 			<div>
-				<img className={css.poster} src={poster} />
+				<img alt="Movie poster" className={css.poster} src={poster} />
 			</div>
 			<div style={{ width: '67%' }}>
 				<div className={css.trailer} onClick={() => setModalOpen(true)}>
 					<div className={css.playButton}>
 						<PlayArrowRoundedIcon sx={{ fontSize: '6em' }} />
 					</div>
-					<img className={css.trailerImage}
+					<img alt="Movie trailer" className={css.trailerImage}
 						src={`https://i.ytimg.com/vi/${movie.trailer}/0.jpg`}
 					/>
 				</div>

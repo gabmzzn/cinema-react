@@ -18,7 +18,7 @@ export const MovieCard = ({ movie }: { movie: MovieDiscover }) => {
 
 	const year = release_date?.split('-')[0]
 
-	const vote = vote_average == 0 ? '?' : vote_average
+	const vote = vote_average === 0 ? '?' : vote_average
 
 	const movieLink = `../movie/${movie.id}-${movie.title.replaceAll(' ', '-').toLowerCase()}`
 	return (

@@ -1,11 +1,9 @@
 import { useState, useEffect } from "react"
 import MovieRating from "../../Layout/MovieRating/MovieRating"
-import { Movie } from "../../Movie/Movie"
 import { MovieCard } from "./MovieCard/MovieCard"
 import css from './MoviesSearch.module.scss'
 import Pagination from '@mui/material/Pagination'
 import { useNavigate, Outlet, useParams } from 'react-router-dom'
-import CircularProgress from "@mui/material/CircularProgress/CircularProgress"
 import { LoadingScreen } from "../../Layout/LoadingScreen/LoadingScreen"
 import { MovieDiscover } from '../../../interfaces/Movie'
 import Button from "@mui/material/Button/Button"
@@ -21,7 +19,9 @@ export const MoviesSearch = () => {
 	const [movies, setMovies] = useState<MovieDiscover[] | undefined>()
 	const [totalPages, setTotalPages] = useState<number>()
 
+	const [load, setLoad] = useState(false)
 	useEffect(() => {
+		setLoad(false)
 		async function searchMovies() {
 			const movies = await fetch(`
 			https://api.themoviedb.org/3/search/movie?api_key=${apiKey}
@@ -36,6 +36,7 @@ export const MoviesSearch = () => {
 			setMovies(sortedMovies)
 			setFetchedMovies(sortedMovies)
 			setTotalPages(movies.total_pages)
+			setLoad(true)
 		}
 		searchMovies()
 	}, [params.query, params.page])
@@ -59,7 +60,7 @@ export const MoviesSearch = () => {
 		setRating(null)
 	}
 
-	if (movies && params.page) {
+	if (movies && params.page && load) {
 		return (
 			<div className={css.main}>
 				<div className={css.header}>

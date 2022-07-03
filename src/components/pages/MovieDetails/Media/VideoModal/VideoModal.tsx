@@ -2,7 +2,7 @@ import Modal from "@mui/material/Modal/Modal"
 import Fade from "@mui/material/Fade/Fade"
 import Button from '@mui/material/Button'
 import css from './VideoModal.module.scss'
-import { useState } from "react"
+import CloseRoundedIcon from '@mui/icons-material/CloseRounded'
 
 export const VideoModal = (movie: any) => {
 
@@ -24,7 +24,9 @@ export const VideoModal = (movie: any) => {
 						allowFullScreen
 					/>
 					<div className={css.closeButton}>
-						<Button variant="outlined">CLOSE VIDEO TRAILER</Button>
+						<Button variant="outlined">
+							<CloseRoundedIcon sx={{ fontSize: '1.95rem' }} />
+						</Button>
 					</div>
 				</div>
 			</Fade>

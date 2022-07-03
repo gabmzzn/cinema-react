@@ -2,7 +2,7 @@
 	position: absolute;
 	display: flex;
 	flex-direction: column;
-	background-color: rgba(0, 0, 0, 0.8);
+	background-color: rgba(0, 0, 0, 0.85);
 	// backdrop-filter: blur(3px);
 	width: 100%;
 	height: 100%;
@@ -20,12 +20,17 @@
 	}
 
 	.closeButton {
-		margin-top: 20px;
+		margin-top: 24px;
 
 		button {
-			font-size: 0.95rem;
-			padding: 10px 20px;
-			background-color: rgba(10, 10, 10, 0.4);
+			padding: 12px 12px;
+			color: rgb(245, 245, 245) !important;
+			border: 2px solid rgba(102, 102, 102, 0.85) !important;
+			background-color: rgba(10, 10, 10, 0.5) !important;
+		}
+
+		button:hover {
+			background-color: rgba(60, 60, 60, 0.5) !important;
 		}
 	}
 }
