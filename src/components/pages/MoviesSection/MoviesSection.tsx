@@ -8,7 +8,6 @@ import { MovieSearch } from '../../../interfaces/Movie'
 import { TopPopularMovie } from './TopPopularMovie/TopPopularMovie'
 import { LoadingScreen } from '../../Layout/LoadingScreen/LoadingScreen'
 import Button from '@mui/material/Button/Button'
-import { Chip } from '@mui/material'
 
 const apiKey = process.env.REACT_APP_API_KEY
 
@@ -37,7 +36,7 @@ export const MoviesSection = (props: { section: string, title: string, sortBy: s
 			setMovies(movies.results)
 			setFetchedMovies(movies.results)
 			setTotalPages(movies.total_pages >= 500 ? 500 : movies.total_pages)
-			isLoaded()
+			isLoaded && isLoaded()
 		}
 		fetchMovies()
 	}, [params.page, sortBy])

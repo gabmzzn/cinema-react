@@ -7,7 +7,7 @@ import Button from '@mui/material/Button/Button'
 export const Header = () => {
 
 	let navigate = useNavigate()
-	const [query, setQuery] = useState<string | undefined>(undefined)
+	const [query, setQuery] = useState<string>('')
 
 	useEffect(() => {
 		if (query !== undefined) {
@@ -16,10 +16,10 @@ export const Header = () => {
 			}, 1000)
 			return () => clearTimeout(timer)
 		}
-	}, [query])
+	}, [query, navigate])
 
 	function handleQuery(query: string, key: boolean) {
-		if (query == '') {
+		if (query === '') {
 			setQuery(query)
 		} else if (query.trim().length > 0) {
 			key ? setQuery(query) : navigate(`/search/${query}/1`)

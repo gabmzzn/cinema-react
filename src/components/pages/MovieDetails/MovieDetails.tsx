@@ -8,11 +8,8 @@ import { Cast } from "./Cast/Cast"
 import { Header } from "./Header/Header"
 import { Media } from "./Media/Media"
 import { Overview } from "./Overview/Overview"
-import { VideoModal } from "./Media/VideoModal/VideoModal"
-
 
 const apiKey = process.env.REACT_APP_API_KEY
-
 
 export const MovieDetails = () => {
 
@@ -23,7 +20,6 @@ export const MovieDetails = () => {
 	const [load, setLoad] = useState(false)
 
 	const [trailer, setTrailer] = useState()
-
 
 	useEffect(() => {
 		setLoad(false)
@@ -51,7 +47,6 @@ export const MovieDetails = () => {
 		fetchMovie()
 	}, [id])
 
-
 	if (movie && load) {
 		return (
 			<div className={css.details}>
@@ -77,7 +72,10 @@ export const MovieDetails = () => {
 					sortBy={'popularity.desc'}
 				/>
 				<div className={css.backdrop}>
-					<img src={`https://image.tmdb.org/t/p/w45${movie.backdrop_path}`} />
+					<img
+						alt={movie.title}
+						src={`https://image.tmdb.org/t/p/w45${movie.backdrop_path}`}
+					/>
 				</div>
 			</div>
 		)

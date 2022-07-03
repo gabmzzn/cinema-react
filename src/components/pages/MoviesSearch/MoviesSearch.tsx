@@ -59,31 +59,31 @@ export const MoviesSearch = () => {
 		setRating(null)
 	}
 
-	return (
-		<div className={css.main}>
-			<div className={css.header}>
-				<h1>Movie Search 🔍</h1>
-				<Button variant="outlined"><b style={{ margin: '3px 9px 1px 1px' }}>FILTER BY VOTE</b>
-					<MovieRating
-						value={rating}
-						handleChange={(e: number, value: number) => setRating(value)}
-					/>
-				</Button>
-			</div>
+	if (movies && params.page) {
+		return (
 			<div className={css.main}>
-				{movies && params.page ?
-					<>
-						{movies.map(movie =>
-							<MovieCard key={movie.id} movie={movie} />
-						)}
-						<div className={css.pagination}>
-							<Pagination siblingCount={3} size='large' count={totalPages} page={parseInt(params.page)} onChange={handlePageChange} />
-						</div>
-					</>
-					: <LoadingScreen />}
-				{movies?.length == 0 && <h1>No movies found</h1>}
+				<div className={css.header}>
+					<h1>Movie Search 🔍</h1>
+					<Button variant="outlined"><b style={{ margin: '3px 9px 1px 1px' }}>FILTER BY VOTE</b>
+						<MovieRating
+							value={rating}
+							handleChange={(e: number, value: number) => setRating(value)}
+						/>
+					</Button>
+				</div>
+				<div className={css.main}>
+					{movies.map(movie =>
+						<MovieCard key={movie.id} movie={movie} />
+					)}
+					<div className={css.pagination}>
+						<Pagination siblingCount={3} size='large' count={totalPages} page={parseInt(params.page)} onChange={handlePageChange} />
+					</div>
+					{movies?.length == 0 && <h1>No movies found</h1>}
+				</div>
+				<Outlet />
 			</div>
-			<Outlet />
-		</div>
-	)
+		)
+	}
+
+	return <LoadingScreen />
 }

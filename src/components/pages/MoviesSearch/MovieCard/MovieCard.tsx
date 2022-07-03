@@ -9,7 +9,7 @@ export const MovieCard = ({ movie }: { movie: MovieDiscover }) => {
 		vote_average, release_date, backdrop_path } = movie
 
 	const poster = poster_path ?
-		`https://image.tmdb.org/t/p/w200${poster_path}` :
+		`https://image.tmdb.org/t/p/w185${poster_path}` :
 		'/images/movie_thumbnail.svg'
 
 	const backdrop = backdrop_path ?
