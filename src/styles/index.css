@@ -6,7 +6,7 @@
 
 html {
 	background-color: rgb(11, 10, 10);
-	/* overflow-y: scroll; */
+	overflow-y: scroll;
 }
 
 body {

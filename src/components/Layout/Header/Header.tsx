@@ -9,6 +9,14 @@ export const Header = () => {
 	let navigate = useNavigate()
 	const [query, setQuery] = useState<string | undefined>(undefined)
 
+	const [scroll, setScroll] = useState(false)
+
+	useEffect(() => {
+		window.addEventListener("scroll", () => {
+			setScroll(window.scrollY > 5)
+		})
+	}, [])
+
 	useEffect(() => {
 		if (query !== undefined) {
 			const timer = setTimeout(() => {
@@ -28,7 +36,10 @@ export const Header = () => {
 
 	return (
 		<div className={css.header}>
-			<div className={css.navbar}>
+			<div className={
+				`${css.navbar} 
+				${scroll ? css.background : css.noBackground}`}
+			>
 				<div className={css.content}>
 					<Link to='/discover/' onClick={() => setQuery('')}>
 						<h1 className={css.logo}>CINEMA<LocalMoviesIcon />REACT</h1>
