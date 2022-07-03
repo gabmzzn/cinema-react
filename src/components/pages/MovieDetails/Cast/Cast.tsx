@@ -8,7 +8,7 @@ export const Cast = ({ movie }: { movie: MovieDetail }) => {
 		<div className={css.cast}>
 			{movie.credits.cast.map((act: any, i: number) => {
 				const img = act.profile_path ?
-					`https://image.tmdb.org/t/p/w200${act.profile_path}` :
+					`https://image.tmdb.org/t/p/w154${act.profile_path}` :
 					'/images/movie_thumbnail.svg'
 				return (
 					<div className={css.act} key={i}>

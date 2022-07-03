@@ -14,9 +14,11 @@ export const Movie = ({ movie }: any) => {
 		`https://image.tmdb.org/t/p/w300${movie.poster_path}` :
 		'/images/movie_thumbnail.svg'
 
+	const movieLink = `../movie/${movie.id}-${movie.title.replaceAll(' ', '-').toLowerCase()}`
+
 	return (
 		<Link
-			to={`../movie/${movie.id}-${movie.title.replaceAll(' ', '-').toLowerCase()}`}
+			to={movieLink}
 		>
 			<div className={css.movie}>
 				{/* <h3>{title}</h3> */}

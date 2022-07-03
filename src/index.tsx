@@ -29,17 +29,20 @@ root.render(
 							section={'popular'}
 							title={'Popular Right Now 🔥'}
 							sortBy={'popularity.desc'}
-						/>} />
+						/>}
+					/>
 					<Route path='/discover/latest/:page'
 						element={<MoviesSection
 							section={'latest'}
 							title={'Latest Releases of the month🍿'}
-							sortBy={'release_date.desc&vote_count.gte=20'} />} />
+							sortBy={'release_date.desc&vote_count.gte=20'} />}
+					/>
 					<Route path='/discover/suggested/:page'
 						element={<MoviesSection
 							section={'suggested'}
 							title={'Our suggestions for you ❤️'}
-							sortBy={'vote_count.desc&vote_count.gte=20'} />} />
+							sortBy={'vote_count.desc&vote_count.gte=20'} />}
+					/>
 					<Route path="/search/:query/:page" element={<MoviesSearch />} />
 					<Route path="/movie/:id" element={<MovieDetails />} />
 					<Route path="*"

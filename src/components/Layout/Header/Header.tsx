@@ -50,7 +50,7 @@ export const Header = () => {
 					</div>
 					<div className={css.buttons}>
 						<Button variant="outlined">LOG IN</Button>
-						<Button variant="contained">REGISTER</Button>
+						<Button variant="contained"><b>REGISTER</b></Button>
 					</div>
 				</div>
 			</div>

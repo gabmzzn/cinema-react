@@ -90,7 +90,7 @@ export const MovieDetails = () => {
 					</Fade>
 				</Modal>
 				<div className={css.header}>
-					<h1>{movie.title} ({movie.release_date?.split('-')[0]})</h1>
+					<h1>{movie.title} ({movie.release_date.split('-')[0]})</h1>
 					<h1><StarIcon fontSize='large' sx={{ color: 'darkorange' }} /> {movie.vote_average}</h1>
 				</div>
 				<div className={css.mainMedia}>
@@ -105,8 +105,8 @@ export const MovieDetails = () => {
 							</div>
 						</div>
 						<div className={css.info}>
-							<Button variant="contained">BUY TICKETS</Button>
-							{movie.genres.map((g, i) => <Chip key={i} color="primary" label={g.name} />)}
+							<Button variant="contained"><b>BUY TICKETS</b></Button>
+							{movie.genres.map((g, i) => <Chip key={i} color="primary" variant="outlined" label={g.name} />)}
 							<h4>Runtime: {movie.runtime} mins ⏱️</h4>
 						</div>
 					</div>
@@ -126,7 +126,7 @@ export const MovieDetails = () => {
 					sortBy={'popularity.desc'}
 				/>
 				<div className={css.backdrops}>
-					<img className={css.backdrop1} src={`https://image.tmdb.org/t/p/w200${movie.backdrop_path}`} />
+					<img className={css.backdrop1} src={`https://image.tmdb.org/t/p/w45${movie.backdrop_path}`} />
 				</div>
 			</div>)
 	}

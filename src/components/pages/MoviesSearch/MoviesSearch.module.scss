@@ -2,12 +2,8 @@
 	display: flex;
 	flex-wrap: wrap;
 	justify-content: center;
-}
-
-.header {
-	display: flex;
-	justify-content: space-between;
-	align-items: center;
+	width: 100%;
+	max-width: 1100px;
 }
 
 .pagination {
@@ -15,4 +11,16 @@
 	align-items: center;
 	justify-content: center;
 	width: 100%;
+}
+
+.header {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin: 20px 0 14px 0;
+	width: 97%;
+
+	h1 {
+		display: flex;
+	}
 }

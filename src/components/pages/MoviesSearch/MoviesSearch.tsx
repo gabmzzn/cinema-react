@@ -8,6 +8,7 @@ import { useNavigate, Outlet, useParams } from 'react-router-dom'
 import CircularProgress from "@mui/material/CircularProgress/CircularProgress"
 import { LoadingScreen } from "../../Layout/LoadingScreen/LoadingScreen"
 import { MovieDiscover } from '../../../interfaces/Movie'
+import Button from "@mui/material/Button/Button"
 
 const apiKey = process.env.REACT_APP_API_KEY
 
@@ -59,13 +60,15 @@ export const MoviesSearch = () => {
 	}
 
 	return (
-		<>
+		<div className={css.main}>
 			<div className={css.header}>
 				<h1>Movie Search 🔍</h1>
-				<MovieRating
-					value={rating}
-					handleChange={(e: number, value: number) => setRating(value)}
-				/>
+				<Button variant="outlined"><b style={{ margin: '3px 9px 1px 1px' }}>FILTER BY VOTE</b>
+					<MovieRating
+						value={rating}
+						handleChange={(e: number, value: number) => setRating(value)}
+					/>
+				</Button>
 			</div>
 			<div className={css.main}>
 				{movies && params.page ?
@@ -81,6 +84,6 @@ export const MoviesSearch = () => {
 				{movies?.length == 0 && <h1>No movies found</h1>}
 			</div>
 			<Outlet />
-		</>
+		</div>
 	)
 }

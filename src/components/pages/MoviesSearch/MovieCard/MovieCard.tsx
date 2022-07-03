@@ -18,12 +18,13 @@ export const MovieCard = ({ movie }: { movie: MovieDiscover }) => {
 
 	const year = release_date?.split('-')[0]
 
-	const vote = vote_average == 0 ? '' : vote_average
+	const vote = vote_average == 0 ? '?' : vote_average
 
+	const movieLink = `../movie/${movie.id}-${movie.title.replaceAll(' ', '-').toLowerCase()}`
 	return (
 		<div className={css.movie} style={{ backgroundImage: `url(${backdrop})` }}>
 			<Link
-				to={`../movie/${movie.id}-${movie.title.replaceAll(' ', '-').toLowerCase()}`}
+				to={movieLink}
 				key={movie.id}
 			>
 				<div className={css.backdrop}>
@@ -31,14 +32,14 @@ export const MovieCard = ({ movie }: { movie: MovieDiscover }) => {
 						src={poster}
 						alt={title} />
 					<div style={{ paddingRight: '10px' }}>
-
 						<div className={css.header}>
-							<h3>{title} ({year})</h3><h3 className={css.vote}><StarIcon fontSize='medium' sx={{ color: 'darkorange' }} /> {vote}</h3>
+							<h3>{title} ({year})</h3>
 						</div>
-						<span>{overview?.substr(0, 200)} [...]</span>
-					</div >
+						<span>{overview.substr(0, 230)}</span>
+					</div>
+					<div className={css.vote}><StarIcon fontSize='medium' sx={{ color: 'darkorange' }} /><span>{vote}</span></div>
 				</div>
-			</Link >
-		</div >
+			</Link>
+		</div>
 	)
 }

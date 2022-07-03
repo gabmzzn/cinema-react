@@ -8,6 +8,7 @@ import { MovieSearch } from '../../../interfaces/Movie'
 import { TopPopularMovie } from './TopPopularMovie/TopPopularMovie'
 import { LoadingScreen } from '../../Layout/LoadingScreen/LoadingScreen'
 import Button from '@mui/material/Button/Button'
+import { Chip } from '@mui/material'
 
 const apiKey = process.env.REACT_APP_API_KEY
 
@@ -66,9 +67,10 @@ export const MoviesSection = (props: { section: string, title: string, sortBy: s
 				{top && <TopPopularMovie movie={movies[0]} />}
 				<h1 className={css.title}>
 					{title}&nbsp;
-					<Link to={`${section}/1`}>
-						<Button variant="outlined">View All ❯</Button>
-					</Link>
+					{section !== 'similar' &&
+						<Link to={`${section}/1`}>
+							<Button variant="outlined">View All ❯</Button>
+						</Link>}
 				</h1>
 				<div className={overflow ? css.overflowMode : css.main}>
 					{movies.slice(top ? 1 : 0, top ? mini + 1 : mini).map((movie) => <Movie key={movie.id} movie={movie} />)}
@@ -78,13 +80,15 @@ export const MoviesSection = (props: { section: string, title: string, sortBy: s
 
 	if (movies) {
 		return (
-			<>
+			<div className={css.main}>
 				<div className={css.header}>
 					<h1>{title}</h1>
-					<MovieRating
-						value={rating}
-						handleChange={(e: number, value: number) => setRating(value)}
-					/>
+					<Button variant="outlined"><b style={{ margin: '3px 9px 1px 1px' }}>FILTER BY VOTE</b>
+						<MovieRating
+							value={rating}
+							handleChange={(e: number, value: number) => setRating(value)}
+						/>
+					</Button>
 				</div>
 				<div className={css.main}>
 					{movies && params.page && movies.length !== 0 &&
@@ -102,7 +106,7 @@ export const MoviesSection = (props: { section: string, title: string, sortBy: s
 					{movies && movies.length === 0 && <h1>Oops! No movies found with your selected rating</h1>}
 				</div>
 				<Outlet />
-			</>)
+			</div>)
 	}
 
 	return <LoadingScreen />
