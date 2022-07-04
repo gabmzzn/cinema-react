@@ -27,6 +27,12 @@ const theme = createTheme({
 })
 
 function App() {
+
+	if (process.env.REACT_APP_API_KEY === undefined) {
+		return <h1>API Authentication Key Not Found</h1>
+	}
+
+
 	return (
 		<ThemeProvider theme={theme}>
 			<Navbar />

@@ -18,11 +18,18 @@
 .header {
 	display: flex;
 	align-items: center;
+	flex-wrap: wrap;
 	justify-content: space-between;
 	margin: 20px 0 14px 0;
 	width: 97%;
 
 	h1 {
 		display: flex;
+	}
+}
+
+@media only screen and (max-width: 600px) {
+	.header {
+		justify-content: center;
 	}
 }

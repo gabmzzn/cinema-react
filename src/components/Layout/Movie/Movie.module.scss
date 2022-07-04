@@ -24,3 +24,12 @@
 	border: 2px solid rgb(255, 198, 128);
 	transition: all 0s;
 }
+
+@media only screen and (max-width: 800px) {
+	.movie {
+		img {
+			width: 150px;
+			height: 226px;
+		}
+	}
+}

@@ -9,6 +9,7 @@
 .header {
 	display: flex;
 	justify-content: space-between;
+	flex-wrap: wrap;
 	align-items: center;
 	width: 97%;
 }
@@ -25,6 +26,8 @@
 .title {
 	display: flex;
 	align-items: center;
+	flex-wrap: wrap;
+	justify-content: center;
 
 	button {
 		font-size: 0.4em;
@@ -45,5 +48,11 @@
 
 	h1 {
 		margin-bottom: 0;
+	}
+}
+
+@media only screen and (max-width: 600px) {
+	.header {
+		justify-content: center;
 	}
 }
