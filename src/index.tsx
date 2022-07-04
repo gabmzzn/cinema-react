@@ -5,10 +5,10 @@ import ReactDOM from 'react-dom/client'
 import './styles/index.css'
 import App from './components/App'
 import reportWebVitals from './tests/reportWebVitals'
-import { MovieDetails } from './components/Pages/MovieDetails/MovieDetails'
-import { MoviesDiscovery } from './components/Pages/MoviesDiscovery/MoviesDiscovery'
-import { MoviesSection } from './components/Pages/MoviesSection/MoviesSection'
-import { MoviesSearch } from './components/Pages/MoviesSearch/MoviesSearch'
+import { MovieDetails } from './components/Pagesx/MovieDetails/MovieDetails'
+import { MoviesDiscovery } from './components/Pagesx/MoviesDiscovery/MoviesDiscovery'
+import { MoviesSection } from './components/Pagesx/MoviesSection/MoviesSection'
+import { MoviesSearch } from './components/Pagesx/MoviesSearch/MoviesSearch'
 import {
 	BrowserRouter,
 	Routes,
