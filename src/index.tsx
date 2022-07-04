@@ -3,12 +3,12 @@ import { useEffect } from "react"
 import { useLocation } from "react-router-dom"
 import ReactDOM from 'react-dom/client'
 import './styles/index.css'
-import App from './App'
+import App from './components/App'
 import reportWebVitals from './tests/reportWebVitals'
-import { MovieDetails } from './components/pages/MovieDetails/MovieDetails'
-import { MoviesDiscovery } from './components/pages/MoviesDiscovery/MoviesDiscovery'
-import { MoviesSection } from './components/pages/MoviesSection/MoviesSection'
-import { MoviesSearch } from './components/pages/MoviesSearch/MoviesSearch'
+import { MovieDetails } from './components/Pages/MovieDetails/MovieDetails'
+import { MoviesDiscovery } from './components/Pages/MoviesDiscovery/MoviesDiscovery'
+import { MoviesSection } from './components/Pages/MoviesSection/MoviesSection'
+import { MoviesSearch } from './components/Pages/MoviesSearch/MoviesSearch'
 import {
 	BrowserRouter,
 	Routes,

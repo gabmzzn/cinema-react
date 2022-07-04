@@ -17,8 +17,9 @@ export const VideoModal = (movie: any) => {
 		>
 			<Fade in={movie.modalOpen}>
 				<div className={css.trailerModal} onClick={movie.onClickModalClose}>
-					<iframe width="937" height="537" src={`https://www.youtube.com/embed/${movie.trailer}?modestbranding=1&autohide=1&showinfo=0&autoplay=1`}
+					<iframe width="937" height="526" src={`https://www.youtube.com/embed/${movie.trailer}?modestbranding=1&autohide=1&showinfo=0&autoplay=1`}
 						className={css.trailerVideo}
+						title="Video"
 						frameBorder="0"
 						allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
 						allowFullScreen

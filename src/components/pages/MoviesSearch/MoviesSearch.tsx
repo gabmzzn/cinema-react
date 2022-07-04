@@ -79,7 +79,7 @@ export const MoviesSearch = () => {
 					<div className={css.pagination}>
 						<Pagination siblingCount={3} size='large' count={totalPages} page={parseInt(params.page)} onChange={handlePageChange} />
 					</div>
-					{movies?.length == 0 && <h1>No movies found</h1>}
+					{movies?.length === 0 && <h1>No movies found</h1>}
 				</div>
 				<Outlet />
 			</div>

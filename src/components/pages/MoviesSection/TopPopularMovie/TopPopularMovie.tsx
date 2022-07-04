@@ -1,5 +1,5 @@
 import css from './TopPopularMovie.module.scss'
-import { Movie } from '../../../Movie/Movie'
+import { Movie } from '../../../Layout/Movie/Movie'
 import { MovieDiscover } from '../../../../interfaces/Movie'
 import Button from '@mui/material/Button/Button'
 import { Link } from 'react-router-dom'
@@ -25,7 +25,7 @@ export const TopPopularMovie = ({ movie }: { movie: MovieDiscover }) => {
 					</Link>
 				</p>
 			</div>
-			<div className={css.backdrops} style={{ backgroundImage: `url(https://image.tmdb.org/t/p/w1280${movie.backdrop_path})` }}>
+			<div className={css.backdrop} style={{ backgroundImage: `url(https://image.tmdb.org/t/p/w1280${movie.backdrop_path})` }}>
 			</div>
 		</div >)
 }

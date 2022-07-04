@@ -16,6 +16,18 @@
 		width: 18em !important;
 		height: 27em !important;
 	}
+
+	animation: fadeRight 1.2s;
+}
+
+@keyframes fadeRight {
+	from {
+		transform: translate(-30px);
+	}
+
+	to {
+		transform: translate(0px);
+	}
 }
 
 .titles {
@@ -41,9 +53,20 @@
 		margin: 0px 0 1px 10px;
 	}
 
+	animation: fadeLeft 1.2s;
 }
 
-.backdrops {
+@keyframes fadeLeft {
+	from {
+		transform: translate(30px);
+	}
+
+	to {
+		transform: translate(0px);
+	}
+}
+
+.backdrop {
 	position: absolute;
 	opacity: 45%;
 	// background-size: cover;

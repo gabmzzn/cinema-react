@@ -35,8 +35,33 @@ a {
 	color: white !important;
 }
 
+.MuiInput-root {
+	transition: all 0.25s;
+}
+
+.MuiInput-root:hover {
+	border-radius: 100px !important;
+	background-color: rgba(255, 140, 0, 0.05) !important;
+}
+
+.MuiInput-root:focus-within {
+	border-radius: 100px !important;
+	background-color: rgba(255, 140, 0, 0.05) !important;
+}
+
 .MuiInput-root:before {
-	border-bottom: 1px solid rgba(255, 255, 255, 0.05) !important;
+	border-bottom: 1px solid transparent !important;
+	width: 94% !important;
+	right: 3% !important;
+	left: 3% !important;
+}
+
+.MuiInput-root:after {
+	border: 1px solid darkorange !important;
+	border-bottom: 1px solid transparent !important;
+	width: 94% !important;
+	right: 3% !important;
+	left: 3% !important;
 }
 
 .MuiLinearProgress-root {
@@ -64,11 +89,6 @@ a {
 	background-color: rgba(10, 10, 10, 0.5) !important;
 }
 
-code {
-	font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New',
-		monospace;
-}
-
 /* Scrollbar  */
 ::-webkit-scrollbar-thumb {
 	background: rgba(100, 100, 100, 0.7);
@@ -84,6 +104,6 @@ code {
 }
 
 ::-webkit-scrollbar {
-	width: 0px;
+	width: 0;
 	height: 10px;
 }

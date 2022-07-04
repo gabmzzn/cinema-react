@@ -1,0 +1,25 @@
+.search {
+	display: flex;
+	width: 100%;
+	align-items: center;
+	justify-content: center;
+	max-width: 500px;
+
+	input {
+		font-size: 1em;
+		text-align: center;
+		background-color: rgba(255, 255, 255, 0.03);
+		border-radius: 100px;
+		border: 1px solid rgba(255, 255, 255, 0.03%);
+	}
+
+	input::placeholder {
+		color: rgb(140, 140, 140);
+		font-style: italic !important;
+		transition: color 0.2s;
+	}
+
+	input:focus::placeholder {
+		color: transparent;
+	}
+}

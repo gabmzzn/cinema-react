@@ -1,6 +1,6 @@
 import css from './MoviesSection.module.scss'
 import { useEffect, useState } from 'react'
-import { Movie } from '../../Movie/Movie'
+import { Movie } from '../../Layout/Movie/Movie'
 import { Outlet, Link, useParams, useNavigate } from "react-router-dom"
 import MovieRating from '../../Layout/MovieRating/MovieRating'
 import Pagination from '@mui/material/Pagination'
@@ -26,7 +26,7 @@ export const MoviesSection = (props: { section: string, title: string, sortBy: s
 		async function fetchMovies() {
 			const movies = await fetch(`
 		https://api.themoviedb.org/3/
-		${section == 'similar' ? `movie/${movieId}/similar` : 'discover/movie'}
+		${section === 'similar' ? `movie/${movieId}/similar` : 'discover/movie'}
 		?api_key=${apiKey}
 		&include_adult=false
 		&language=en-US
