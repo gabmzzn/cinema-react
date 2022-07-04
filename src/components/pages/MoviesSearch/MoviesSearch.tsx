@@ -7,7 +7,6 @@ import { useNavigate, Outlet, useParams } from 'react-router-dom'
 import { LoadingScreen } from "../../Layout/LoadingScreen/LoadingScreen"
 import { MovieDiscover } from '../../../interfaces/Movie'
 import Button from "@mui/material/Button/Button"
-
 const apiKey = process.env.REACT_APP_API_KEY
 
 export const MoviesSearch = () => {

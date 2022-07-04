@@ -10,7 +10,7 @@ export const Cast = ({ cast }: { cast: MovieActor[] }) => {
 			{cast.map((act: MovieActor, i: number) => {
 				const img = act.profile_path ?
 					`https://image.tmdb.org/t/p/w154${act.profile_path}` :
-					'/images/movie_thumbnail.svg'
+					'/images/thumbnail.png'
 				return (
 					<div className={css.act} key={i}>
 						<div>

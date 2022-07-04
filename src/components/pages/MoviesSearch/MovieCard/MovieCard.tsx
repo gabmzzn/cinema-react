@@ -10,16 +10,14 @@ export const MovieCard = ({ movie }: { movie: MovieDiscover }) => {
 
 	const poster = poster_path ?
 		`https://image.tmdb.org/t/p/w185${poster_path}` :
-		'/images/movie_thumbnail.svg'
+		'/images/thumbnail.png'
 
 	const backdrop = backdrop_path ?
 		`https://image.tmdb.org/t/p/w200${backdrop_path}` :
-		'/images/movie_thumbnail.svg'
+		'/images/thumbnail.png'
 
 	const year = release_date?.split('-')[0]
-
 	const vote = vote_average === 0 ? '?' : vote_average
-
 	const movieLink = `../movie/${movie.id}-${movie.title.replaceAll(' ', '-').toLowerCase()}`
 	return (
 		<div className={css.movie} style={{ backgroundImage: `url(${backdrop})` }}>

@@ -36,9 +36,6 @@ export const MovieDetails = () => {
 					vid.name.includes('trailer') || vid.name.includes('Trailer'))
 				setTrailer(videoWithTrailer ? videoWithTrailer.key : movie.videos.results[0].key)
 			}
-			else {
-				setTrailer('')
-			}
 			setMovie(movie)
 			setLoad(true)
 		}
