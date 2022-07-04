@@ -5,8 +5,16 @@ import LocalActivityIcon from '@mui/icons-material/LocalActivity'
 import Button from '@mui/material/Button'
 import { VideoModal } from './VideoModal/VideoModal'
 import { useState } from 'react'
+import { MovieDetail } from '../../../../interfaces/Movie'
 
-export const Media = (movie: any) => {
+interface MediaProps {
+	poster_path: string | null
+	trailer: string
+	runtime: number
+	genres: [{ id: number; name: string }]
+}
+
+export const Media = (movie: MediaProps) => {
 
 	const poster = movie.poster_path ?
 		`https://image.tmdb.org/t/p/w300${movie.poster_path}` :
@@ -40,7 +48,7 @@ export const Media = (movie: any) => {
 							<LocalActivityIcon fontSize="small" />
 						</b>
 					</Button>
-					{movie.genres.map((g: any, i: number) =>
+					{movie.genres.map((g: { name: string }, i: number) =>
 						<Chip
 							key={i} color="primary" variant="outlined"
 							label={g.name}

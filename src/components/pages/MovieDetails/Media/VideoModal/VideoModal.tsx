@@ -4,15 +4,21 @@ import Button from '@mui/material/Button'
 import css from './VideoModal.module.scss'
 import CloseRoundedIcon from '@mui/icons-material/CloseRounded'
 
-export const VideoModal = (movie: any) => {
+interface VideoModalProps {
+	trailer: string
+	modalOpen: boolean
+	onClickModalClose: () => void
+}
+
+export const VideoModal = (movie: VideoModalProps) => {
 
 	return (
 		<Modal
 			sx={{ overflowY: 'scroll' }}
 			open={movie.modalOpen}
 			disableAutoFocus={true}
-			aria-labelledby="modal-modal-title"
-			aria-describedby="modal-modal-description"
+			aria-labelledby="Video Modal"
+			aria-describedby="Trailer"
 			hideBackdrop
 		>
 			<Fade in={movie.modalOpen}>

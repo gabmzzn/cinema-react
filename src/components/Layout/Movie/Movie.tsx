@@ -1,14 +1,12 @@
 import { Link } from 'react-router-dom'
+import { MovieDetail, MovieDiscover, MovieSearch } from '../../../interfaces/Movie'
 import css from './Movie.module.scss'
 
-export interface MovieProps {
-	title: string,
-	overview: string,
-	poster: string,
-	rating: number
+interface MovieProps {
+	movie: MovieSearch | MovieDiscover | MovieDetail
 }
 
-export const Movie = ({ movie }: any) => {
+export const Movie = ({ movie }: MovieProps) => {
 
 	const poster = movie.poster_path ?
 		`https://image.tmdb.org/t/p/w300${movie.poster_path}` :
@@ -17,18 +15,9 @@ export const Movie = ({ movie }: any) => {
 	const movieLink = `../movie/${movie.id}-${movie.title.replaceAll(' ', '-').toLowerCase()}`
 
 	return (
-		<Link
-			to={movieLink}
-		>
+		<Link to={movieLink}>
 			<div className={css.movie}>
-				{/* <h3>{title}</h3> */}
-				<img
-					src={poster}
-					alt={movie.title}
-				/>
-				{/* <p>{overview}</p> */}
-				{/* <h2><b>{rating}</b></h2> */}
+				<img src={poster} alt={movie.title} />
 			</div>
-		</Link>
-	)
+		</Link>)
 }

@@ -38,15 +38,21 @@ export interface MovieDetail {
 	poster_path: string | null
 	backdrop_path: string | null
 	credits: {
-		cast: any
+		cast: MovieActor[]
 	}
 	videos?: {
-		results: any
+		results: {
+			name:string
+	}
 	}
 	genres: [{
 		id: number
 		name: string
 	}]
+}
 
-
+export interface MovieActor {
+	name: string
+	character: string
+	profile_path: string
 }

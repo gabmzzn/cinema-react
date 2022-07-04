@@ -68,7 +68,7 @@ export const MoviesSearch = () => {
 					<Button variant="outlined"><b style={{ margin: '3px 9px 1px 1px' }}>FILTER BY VOTE</b>
 						<MovieRating
 							value={rating}
-							handleChange={(e: number, value: number) => setRating(value)}
+							handleChange={(e, value) => setRating(value)}
 						/>
 					</Button>
 				</div>

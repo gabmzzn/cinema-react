@@ -39,13 +39,12 @@ export const InputSearch = () => {
 				fullWidth
 				value={query}
 				onChange={e => handleQuery(e.target.value, false)}
-				onKeyPress={(e: any) => {
+				onKeyPress={(e: React.KeyboardEvent<HTMLImageElement>) => {
 					if (e.key === "Enter") {
 						e.preventDefault()
-						handleQuery(e.target.value, true)
+						handleQuery((e.target as HTMLInputElement).value, true)
 					}
 				}}
 			/>
-		</div>
-	)
+		</div>)
 }

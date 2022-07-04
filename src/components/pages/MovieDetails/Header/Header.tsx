@@ -1,13 +1,20 @@
 import css from './Header.module.scss'
 import StarIcon from '@mui/icons-material/Star'
 
-export const Header = (movie: any) => {
+interface HeaderProps {
+	title: string
+	release_date: string
+	vote_average: number
+}
+
+export const Header = ({ title, release_date, vote_average }: HeaderProps) => {
+
 	return (
 		<div className={css.header}>
-			<h1>{movie.title} ({movie.release_date.split('-')[0]})</h1>
+			<h1>{title} ({release_date.split('-')[0]})</h1>
 			<h1 style={{ display: 'flex', alignItems: 'center' }}>
 				<StarIcon sx={{ color: 'darkorange', fontSize: '1.02em' }} />
-				{movie.vote_average === 0 ? '?' : movie.vote_average}
+				{vote_average === 0 ? '?' : vote_average}
 			</h1>
 		</div>
 	)

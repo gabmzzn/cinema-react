@@ -8,20 +8,16 @@ import { Cast } from "./Cast/Cast"
 import { Header } from "./Header/Header"
 import { Media } from "./Media/Media"
 import { Overview } from "./Overview/Overview"
-
 const apiKey = process.env.REACT_APP_API_KEY
 
 export const MovieDetails = () => {
 
 	let params = useParams()
 	const { id } = params
-
+	const { pathname } = useLocation()
 	const [movie, setMovie] = useState<MovieDetail>()
 	const [load, setLoad] = useState(false)
-
-	const [trailer, setTrailer] = useState()
-
-	const { pathname } = useLocation()
+	const [trailer, setTrailer] = useState('')
 
 	useEffect(() => {
 		setLoad(false)
@@ -36,12 +32,12 @@ export const MovieDetails = () => {
 			//This tries to determine which video is a movie trailer
 			//If we dont get a 'trailer' keyword we stick to the first video
 			if (movie.videos.results.length > 0) {
-				const videoWithTrailer = movie.videos.results.find((vid: any) =>
-					vid.name.includes('trailer') || vid.name.includes('Trailer')
-				)
+				const videoWithTrailer = movie.videos.results.find((vid: { name: string }) =>
+					vid.name.includes('trailer') || vid.name.includes('Trailer'))
 				setTrailer(videoWithTrailer ? videoWithTrailer.key : movie.videos.results[0].key)
-			} else {
-				setTrailer(undefined)
+			}
+			else {
+				setTrailer('')
 			}
 			setMovie(movie)
 			setLoad(true)
@@ -64,7 +60,7 @@ export const MovieDetails = () => {
 					runtime={movie.runtime}
 				/>
 				<Overview overview={movie.overview} />
-				<Cast movie={movie} />
+				<Cast cast={movie.credits.cast} />
 				<MoviesSection
 					mini={20}
 					overflow

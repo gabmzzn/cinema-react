@@ -4,6 +4,8 @@ import { useEffect, useState } from 'react'
 import LocalMoviesIcon from '@mui/icons-material/LocalMovies'
 import Button from '@mui/material/Button/Button'
 import { InputSearch } from './InputSearch/InputSearch'
+
+
 export const Header = () => {
 
 	const [scroll, setScroll] = useState(false)

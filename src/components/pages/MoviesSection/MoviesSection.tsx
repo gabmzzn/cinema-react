@@ -8,10 +8,20 @@ import { MovieSearch } from '../../../interfaces/Movie'
 import { TopPopularMovie } from './TopPopularMovie/TopPopularMovie'
 import { LoadingScreen } from '../../Layout/LoadingScreen/LoadingScreen'
 import Button from '@mui/material/Button/Button'
-
 const apiKey = process.env.REACT_APP_API_KEY
 
-export const MoviesSection = (props: { section: string, title: string, sortBy: string, mini?: number, top?: boolean, isLoaded?: any, movieId?: number, overflow?: boolean }) => {
+interface MoviesSectionProps {
+	section: string
+	title: string
+	sortBy: string
+	mini?: number
+	top?: boolean
+	isLoaded?: () => void
+	movieId?: number
+	overflow?: boolean
+}
+
+export const MoviesSection = (props: MoviesSectionProps) => {
 
 	let params = useParams()
 	let navigate = useNavigate()
@@ -85,7 +95,7 @@ export const MoviesSection = (props: { section: string, title: string, sortBy: s
 					<Button variant="outlined"><b style={{ margin: '3px 9px 1px 1px' }}>FILTER BY VOTE</b>
 						<MovieRating
 							value={rating}
-							handleChange={(e: number, value: number) => setRating(value)}
+							handleChange={(e, value) => setRating(value)}
 						/>
 					</Button>
 				</div>
