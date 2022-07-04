@@ -15,10 +15,15 @@
 		align-items: center;
 		justify-content: center;
 		cursor: pointer;
+		transition: filter 0.25s;
 
 		img {
 			object-fit: cover;
 		}
+	}
+
+	.trailer:hover {
+		filter: brightness(1.2);
 	}
 
 	.trailerImage {

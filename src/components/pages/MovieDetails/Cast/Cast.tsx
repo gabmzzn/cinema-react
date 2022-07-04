@@ -14,7 +14,7 @@ export const Cast = ({ cast }: { cast: MovieActor[] }) => {
 				return (
 					<div className={css.act} key={i}>
 						<div>
-							<img src={img} alt={act.name} width={'130px'} />
+							<img src={img} alt={act.name} width={'134px'} />
 							<p>{act.name}</p>
 							<p style={{ opacity: '50%' }}>{act.character}</p>
 						</div>
