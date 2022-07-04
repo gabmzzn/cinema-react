@@ -1,17 +1,18 @@
 import { useEffect, useState } from 'react'
 import { useParams } from "react-router-dom"
-import { MovieSearch } from '../../../interfaces/Movie'
+import { MovieDiscover, MovieSearch } from '../../../interfaces/Movie'
 import { LoadingScreen } from '../../Layout/LoadingScreen/LoadingScreen'
-import { MiniSection } from './SectionsModes/MiniSection/MiniSection'
-import { FullSection } from './SectionsModes/FullSection/FullSection'
+import { MiniSection } from './Sections/MiniSection/MiniSection'
+import { FullSection } from './Sections/FullSection/FullSection'
 const apiKey = process.env.REACT_APP_API_KEY
 
 interface MoviesSectionProps {
 	section: string
 	title: string
-	sortBy: string
+	sortBy?: string
 	mini?: number
 	top?: boolean
+	cards?: boolean
 	isLoaded?: () => void
 	movieId?: number
 	overflow?: boolean
@@ -23,9 +24,9 @@ interface MoviesSectionProps {
 */
 export const MoviesSection = (props: MoviesSectionProps) => {
 
-	const { section, title, sortBy, mini, isLoaded, top, movieId, overflow } = props
+	const { section, title, sortBy, cards, mini, isLoaded, top, movieId, overflow } = props
 
-	const [movies, setMovies] = useState<MovieSearch[] | undefined>()
+	const [movies, setMovies] = useState<MovieDiscover[] | undefined>()
 	const [totalPages, setTotalPages] = useState(0)
 
 	const [loading, setLoading] = useState(true)
@@ -33,22 +34,30 @@ export const MoviesSection = (props: MoviesSectionProps) => {
 	let params = useParams()
 
 	/*
-	* Fetch for movies of DISCOVER or SIMILAR acording to props
-	* SIMILAR is intended to use when you want to get related movies
-	* based on a single movie ID
+	* Fetch for movies of DISCOVER/SIMILAR/SEARCH categories acording to props
 	*/
 	useEffect(() => {
-		setLoading(true)
 		async function fetchMovies() {
+
+			const similar = `movie/${movieId}/similar`
+			const discover = 'discover/movie'
+			const search = 'search/movie'
+
+			setLoading(true)
 			const movies = await fetch(`
-		https://api.themoviedb.org/3/
-		${section === 'similar' ? `movie/${movieId}/similar` : 'discover/movie'}
-		?api_key=${apiKey}
-		&include_adult=false
-		&language=en-US
-		${mini ? '' : `&page=${params.page}`}
-		&sort_by=${sortBy}
-		`).then(r => r.json())
+			https://api.themoviedb.org/3/
+			${section === 'similar' ? similar : section !== 'search' ? discover : search}
+			?api_key=${apiKey}
+			&include_adult=false
+			${section === 'search' ? `&query=${params.query}` : ''}
+			${mini ? '' : `&page=${params.page}`}
+			${sortBy ? `&sort_by=${sortBy}` : ''}
+			`).then(r => r.json())
+
+			// This is for getting the most relevant results of the search
+			section === 'search' && movies.results
+				.sort((a: MovieSearch, b: MovieSearch) => b.vote_count - a.vote_count)
+
 			setMovies(movies.results)
 			setFetchedMovies(movies.results)
 			setTotalPages(movies.total_pages >= 500 ? 500 : movies.total_pages)
@@ -56,7 +65,7 @@ export const MoviesSection = (props: MoviesSectionProps) => {
 			setLoading(false)
 		}
 		fetchMovies()
-	}, [params.page, sortBy])
+	}, [params.page, sortBy, params.query])
 
 	/* 
  * Handles rating, if we unselect the rating we display the original fetch
@@ -97,9 +106,10 @@ export const MoviesSection = (props: MoviesSectionProps) => {
 			<FullSection
 				title={title}
 				section={section}
-				page={params.page}
+				params={params}
 				movies={movies}
 				rating={rating}
+				cards={cards}
 				onRatingChange={value => setRating(value)}
 				totalPages={totalPages}
 			/>)

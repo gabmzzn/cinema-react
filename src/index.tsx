@@ -41,7 +41,6 @@ root.render(
 						element={<MoviesSection
 							section={'popular'}
 							title={'Popular Right Now 🔥'}
-							sortBy={'popularity.desc'}
 						/>}
 					/>
 					<Route path='/discover/latest/:page'
@@ -56,7 +55,12 @@ root.render(
 							title={'Our suggestions for you ❤️'}
 							sortBy={'vote_count.desc&vote_count.gte=20'} />}
 					/>
-					<Route path="/search/:query/:page" element={<MoviesSearch />} />
+					<Route path="/search/:query/:page"
+						element={<MoviesSection
+							section={'search'}
+							title={'Movie Search 🔍'}
+							cards={true}
+						/>} />
 					<Route path="/movie/:id" element={<MovieDetails />} />
 					<Route path="*"
 						element={

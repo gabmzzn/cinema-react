@@ -1,6 +1,6 @@
 import Button from "@mui/material/Button/Button"
 import { Link } from "react-router-dom"
-import { MovieSearch } from "../../../../../interfaces/Movie"
+import { MovieDiscover } from "../../../../../interfaces/Movie"
 import { Movie } from "../../../../Layout/Movie/Movie"
 import { TopPopularMovie } from "./TopPopularMovie/TopPopularMovie"
 import css from './MiniSection.module.scss'
@@ -9,7 +9,7 @@ interface MiniSectionProps {
 	top: boolean | undefined
 	title: string
 	section: string
-	movies: MovieSearch[]
+	movies: MovieDiscover[]
 	overflow?: boolean
 	miniAmount: number
 }

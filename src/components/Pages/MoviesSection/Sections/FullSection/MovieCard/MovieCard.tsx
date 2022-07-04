@@ -1,5 +1,5 @@
 import css from './MovieCard.module.scss'
-import { MovieDiscover } from '../../../../interfaces/Movie'
+import { MovieDiscover } from '../../../../../../interfaces/Movie'
 import { Link } from 'react-router-dom'
 import StarIcon from '@mui/icons-material/Star'
 

@@ -1,26 +1,28 @@
 import Button from "@mui/material/Button/Button"
 import Pagination from "@mui/material/Pagination/Pagination"
-import { MovieSearch } from "../../../../../interfaces/Movie"
+import { MovieDiscover } from "../../../../../interfaces/Movie"
 import { Movie } from "../../../../Layout/Movie/Movie"
 import MovieRating from "../../../../Layout/MovieRating/MovieRating"
 import css from './FullSection.module.scss'
-import { Outlet, useNavigate } from "react-router-dom"
+import { Outlet, Params, useNavigate } from "react-router-dom"
+import { MovieCard } from "./MovieCard/MovieCard"
 
 interface FullSectionProps {
 	title: string
 	section: string
 	rating: number | null
-	page: string | undefined
-	movies: MovieSearch[]
+	params: Readonly<Params<string>> | undefined
+	movies: MovieDiscover[]
 	onRatingChange: (value: number | null) => void
 	totalPages: number
+	cards?: boolean
 }
 
 /*
 * Full version display with when no 'mini' is true
 * Here we show FilterByVote, ViewAll, and Pagination controls
 */
-export const FullSection = ({ title, rating, section, page, movies, onRatingChange, totalPages }: FullSectionProps) => {
+export const FullSection = ({ title, rating, section, params, movies, onRatingChange, totalPages, cards }: FullSectionProps) => {
 
 	/* 
 	 * Handles pagination, the fetchMovies() function from parent componet gets 
@@ -29,7 +31,9 @@ export const FullSection = ({ title, rating, section, page, movies, onRatingChan
 	 */
 	let navigate = useNavigate()
 	const handlePageChange = (e: React.ChangeEvent<unknown>, page: number) => {
-		navigate(`/discover/${section}/${page}`)
+		section !== 'search' ?
+			navigate(`/discover/${section}/${page}`) :
+			navigate(`/search/${params?.query}/${page}`)
 		onRatingChange(null)
 	}
 
@@ -48,18 +52,22 @@ export const FullSection = ({ title, rating, section, page, movies, onRatingChan
 				</Button>
 			</div>
 			<div className={css.main}>
-				{page && movies.length !== 0 &&
+				{params?.page && movies.length !== 0 &&
 					<>
-						{movies.map(movie =>
-							<Movie
-								key={movie.id}
-								id={movie.id}
-								title={movie.title}
-								poster_path={movie.poster_path}
-							/>)}
+						{section !== 'search' ?
+							movies.map(movie =>
+								<Movie
+									key={movie.id}
+									id={movie.id}
+									title={movie.title}
+									poster_path={movie.poster_path}
+								/>) :
+							movies.map((movie: MovieDiscover) =>
+								<MovieCard key={movie.id} movie={movie} />)
+						}
 						<div className={css.pagination}>
 							<Pagination
-								page={parseInt(page)}
+								page={parseInt(params.page)}
 								onChange={handlePageChange}
 								count={totalPages}
 								siblingCount={3} size='large'
