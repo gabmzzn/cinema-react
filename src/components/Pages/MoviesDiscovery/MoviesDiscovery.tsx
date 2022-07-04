@@ -4,6 +4,7 @@ import { Outlet } from "react-router-dom"
 import { LoadingScreen } from '../../Layout/LoadingScreen/LoadingScreen'
 import { MoviesSection } from '../MoviesSection/MoviesSection'
 
+
 export const MoviesDiscovery = () => {
 
 	const [ready, setReady] = useState(0)

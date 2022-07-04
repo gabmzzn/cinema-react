@@ -8,6 +8,8 @@ import { InputSearch } from './InputSearch/InputSearch'
 
 export const Navbar = () => {
 
+
+	//Listener to check if we change Navbar style
 	const [scroll, setScroll] = useState(false)
 
 	useEffect(() => {

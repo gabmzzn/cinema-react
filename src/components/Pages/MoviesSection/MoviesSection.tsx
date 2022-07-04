@@ -1,7 +1,5 @@
-import css from './MoviesSection.module.scss'
 import { useEffect, useState } from 'react'
-import { Movie } from '../../Layout/Movie/Movie'
-import { Outlet, Link, useParams, useNavigate } from "react-router-dom"
+import { useParams } from "react-router-dom"
 import { MovieSearch } from '../../../interfaces/Movie'
 import { LoadingScreen } from '../../Layout/LoadingScreen/LoadingScreen'
 import { MiniSection } from './SectionsModes/MiniSection/MiniSection'
@@ -21,7 +19,7 @@ interface MoviesSectionProps {
 
 /*
 * MoviesSection displays on a wrapeable flex-box of Movies components
-*	Can be used on portions of page or as main content of a iscovery
+*	Can be used on portions of page (MiniSection) or as main content of a discovery (FullSection)
 */
 export const MoviesSection = (props: MoviesSectionProps) => {
 
@@ -29,6 +27,8 @@ export const MoviesSection = (props: MoviesSectionProps) => {
 
 	const [movies, setMovies] = useState<MovieSearch[] | undefined>()
 	const [totalPages, setTotalPages] = useState(0)
+
+	const [loading, setLoading] = useState(true)
 
 	let params = useParams()
 
@@ -38,6 +38,7 @@ export const MoviesSection = (props: MoviesSectionProps) => {
 	* based on a single movie ID
 	*/
 	useEffect(() => {
+		setLoading(true)
 		async function fetchMovies() {
 			const movies = await fetch(`
 		https://api.themoviedb.org/3/
@@ -49,18 +50,36 @@ export const MoviesSection = (props: MoviesSectionProps) => {
 		&sort_by=${sortBy}
 		`).then(r => r.json())
 			setMovies(movies.results)
+			setFetchedMovies(movies.results)
 			setTotalPages(movies.total_pages >= 500 ? 500 : movies.total_pages)
 			isLoaded && isLoaded()
+			setLoading(false)
 		}
 		fetchMovies()
 	}, [params.page, sortBy])
 
 	/* 
-	* Intented to use on landing page in conjuntion with other Sections
-	* 'mini' props we display an optionally shorter version 
-	* 'overflow' props the discovery will display on a single row scrolleable horizontally
-	* 'top' props will display a top section which with the first element of the discovery
-	*/
+ * Handles rating, if we unselect the rating we display the original fetch
+ */
+	const [fetchedMovies, setFetchedMovies] = useState<MovieSearch[]>()
+	const [rating, setRating] = useState<number | null>(null)
+
+	useEffect(() => {
+		if (rating) {
+			const moviesByRating = fetchedMovies?.filter(movie =>
+				movie.vote_average >= rating * 2 - 2 &&
+				movie.vote_average <= rating * 2
+			)
+			setMovies(moviesByRating)
+		}
+		else {
+			setMovies(fetchedMovies)
+		}
+	}, [rating])
+
+	//Here we make sure to not show loading screen when 'mini' is on
+	if (loading && !mini) return <LoadingScreen />
+
 	if (movies && mini) {
 		return (
 			<MiniSection
@@ -73,10 +92,6 @@ export const MoviesSection = (props: MoviesSectionProps) => {
 			/>)
 	}
 
-	/*
-	* Full version display with when no 'mini' is true
-	* Here we show FilterByVote, ViewAll, and Pagination controls
-	*/
 	if (movies) {
 		return (
 			<FullSection
@@ -84,16 +99,11 @@ export const MoviesSection = (props: MoviesSectionProps) => {
 				section={section}
 				page={params.page}
 				movies={movies}
-				onRatingChange={(movies) => setMovies(movies)}
+				rating={rating}
+				onRatingChange={value => setRating(value)}
 				totalPages={totalPages}
 			/>)
 	}
 
-	/*
-	* Here we prevent to show LoadingScreen when 'mini' version is enabled
-	* Otherwise a loading screen will shop up
-	*/
-	if (mini) return null
-
-	return <LoadingScreen />
+	return null
 }

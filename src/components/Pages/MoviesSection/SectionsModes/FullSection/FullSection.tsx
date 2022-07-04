@@ -5,37 +5,22 @@ import { Movie } from "../../../../Layout/Movie/Movie"
 import MovieRating from "../../../../Layout/MovieRating/MovieRating"
 import css from './FullSection.module.scss'
 import { Outlet, useNavigate } from "react-router-dom"
-import { useEffect, useState } from "react"
 
 interface FullSectionProps {
 	title: string
 	section: string
+	rating: number | null
 	page: string | undefined
 	movies: MovieSearch[]
-	onRatingChange: (e: MovieSearch[] | undefined) => void
+	onRatingChange: (value: number | null) => void
 	totalPages: number
 }
 
-export const FullSection = ({ title, section, page, movies, onRatingChange, totalPages }: FullSectionProps) => {
-
-	/* 
-	 * Handles rating, if we unselect the rating we display the original fetch
-	 */
-	const [fetchedMovies, setFetchedMovies] = useState<MovieSearch[]>(movies)
-	const [rating, setRating] = useState<number | null>(null)
-
-	useEffect(() => {
-		if (rating) {
-			const moviesByRating = [...fetchedMovies].filter(movie =>
-				movie.vote_average >= rating * 2 - 2 &&
-				movie.vote_average <= rating * 2
-			)
-			onRatingChange(moviesByRating)
-		}
-		else {
-			onRatingChange(fetchedMovies)
-		}
-	}, [rating])
+/*
+* Full version display with when no 'mini' is true
+* Here we show FilterByVote, ViewAll, and Pagination controls
+*/
+export const FullSection = ({ title, rating, section, page, movies, onRatingChange, totalPages }: FullSectionProps) => {
 
 	/* 
 	 * Handles pagination, the fetchMovies() function from parent componet gets 
@@ -45,7 +30,7 @@ export const FullSection = ({ title, section, page, movies, onRatingChange, tota
 	let navigate = useNavigate()
 	const handlePageChange = (e: React.ChangeEvent<unknown>, page: number) => {
 		navigate(`/discover/${section}/${page}`)
-		setRating(null)
+		onRatingChange(null)
 	}
 
 	return (
@@ -58,7 +43,7 @@ export const FullSection = ({ title, section, page, movies, onRatingChange, tota
 					</b>
 					<MovieRating
 						value={rating}
-						handleChange={(e, value) => setRating(value)}
+						handleChange={(e, value) => onRatingChange(value)}
 					/>
 				</Button>
 			</div>

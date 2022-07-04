@@ -1,6 +1,6 @@
 import Button from "@mui/material/Button/Button"
 import { Link } from "react-router-dom"
-import { MovieDiscover, MovieSearch } from "../../../../../interfaces/Movie"
+import { MovieSearch } from "../../../../../interfaces/Movie"
 import { Movie } from "../../../../Layout/Movie/Movie"
 import { TopPopularMovie } from "./TopPopularMovie/TopPopularMovie"
 import css from './MiniSection.module.scss'
@@ -14,6 +14,12 @@ interface MiniSectionProps {
 	miniAmount: number
 }
 
+/*
+* Intented to use on landing page in conjuntion with other Sections
+* 'mini' props we display an optionally shorter version 
+* 'overflow' props the discovery will display on a single row scrolleable horizontally
+* 'top' props will display a top section which with the first element of the discovery
+*/
 export const MiniSection = ({ top, movies, title, section, overflow, miniAmount }: MiniSectionProps) => {
 	return (
 		<>
