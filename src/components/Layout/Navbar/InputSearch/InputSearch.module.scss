@@ -23,3 +23,11 @@
 		color: transparent;
 	}
 }
+
+@media only screen and (max-width: 800px) {
+	.search {
+		input::placeholder {
+			color: transparent;
+		}
+	}
+}
