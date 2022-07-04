@@ -35,7 +35,7 @@ export const MovieCard = ({ movie }: { movie: MovieDiscover }) => {
 						<div className={css.header}>
 							<h3>{title} ({year})</h3>
 						</div>
-						<span>{overview.substr(0, 230)}</span>
+						<span>{overview.substr(0, 180)}</span>
 					</div>
 					<div className={css.vote}><StarIcon fontSize='medium' sx={{ color: 'darkorange' }} /><span>{vote}</span></div>
 				</div>

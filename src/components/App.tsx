@@ -1,5 +1,5 @@
 import css from './App.module.scss'
-import { Header } from './Layout/Header/Header'
+import { Navbar } from './Layout/Navbar/Navbar'
 import { Outlet } from "react-router-dom"
 import ThemeProvider from '@mui/material/styles/ThemeProvider'
 import createTheme from '@mui/material/styles/createTheme'
@@ -29,7 +29,7 @@ const theme = createTheme({
 function App() {
 	return (
 		<ThemeProvider theme={theme}>
-			<Header />
+			<Navbar />
 			<div className={css.content}>
 				<Outlet />
 				<Footer />

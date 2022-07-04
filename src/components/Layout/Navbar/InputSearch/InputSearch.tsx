@@ -10,6 +10,12 @@ export const InputSearch = () => {
 	const [query, setQuery] = useState<string>('')
 
 	useEffect(() => {
+		params.hasOwnProperty('query') &&
+			params.query !== undefined &&
+			setQuery(params.query)
+	}, [])
+
+	useEffect(() => {
 		if (query !== '' && !('query' in params)) {
 			setQuery('')
 		}

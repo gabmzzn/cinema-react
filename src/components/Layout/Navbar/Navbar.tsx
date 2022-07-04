@@ -1,4 +1,4 @@
-import css from './Header.module.scss'
+import css from './Navbar.module.scss'
 import { Link } from 'react-router-dom'
 import { useEffect, useState } from 'react'
 import LocalMoviesIcon from '@mui/icons-material/LocalMovies'
@@ -6,7 +6,7 @@ import Button from '@mui/material/Button/Button'
 import { InputSearch } from './InputSearch/InputSearch'
 
 
-export const Header = () => {
+export const Navbar = () => {
 
 	const [scroll, setScroll] = useState(false)
 
