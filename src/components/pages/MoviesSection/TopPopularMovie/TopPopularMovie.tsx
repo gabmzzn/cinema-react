@@ -12,7 +12,12 @@ export const TopPopularMovie = ({ movie }: { movie: MovieDiscover }) => {
 	return (
 		<div className={css.topPopular}>
 			<div className={css.topPoster}>
-				<Movie movie={movie} />
+				<Movie
+					key={movie.id}
+					id={movie.id}
+					title={movie.title}
+					poster_path={movie.poster_path}
+				/>
 			</div>
 			<div className={css.titles}>
 				<h1>Top #1 popular movie right now 🔥</h1>
@@ -21,11 +26,17 @@ export const TopPopularMovie = ({ movie }: { movie: MovieDiscover }) => {
 				</Link>
 				<p>
 					<Link to={movieLink}>
-						<Button variant="outlined"><b style={{ display: 'flex', alignItems: 'center' }}>BUY TICKES NOW <LocalActivityIcon /></b></Button>
+						<Button variant="outlined">
+							<b style={{ display: 'flex', alignItems: 'center' }}>
+								BUY TICKES NOW <LocalActivityIcon />
+							</b>
+						</Button>
 					</Link>
 				</p>
 			</div>
-			<div className={css.backdrop} style={{ backgroundImage: `url(https://image.tmdb.org/t/p/w1280${movie.backdrop_path})` }}>
+			<div
+				className={css.backdrop}
+				style={{ backgroundImage: `url(https://image.tmdb.org/t/p/w1280${movie.backdrop_path})` }}>
 			</div>
-		</div >)
+		</div>)
 }

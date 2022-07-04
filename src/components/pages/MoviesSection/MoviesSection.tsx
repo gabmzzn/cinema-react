@@ -82,7 +82,13 @@ export const MoviesSection = (props: MoviesSectionProps) => {
 						</Link>}
 				</h1>
 				<div className={overflow ? css.overflowMode : css.main}>
-					{movies.slice(top ? 1 : 0, top ? mini + 1 : mini).map((movie) => <Movie key={movie.id} movie={movie} />)}
+					{movies.slice(top ? 1 : 0, top ? mini + 1 : mini).map((movie) =>
+						<Movie
+							key={movie.id}
+							id={movie.id}
+							title={movie.title}
+							poster_path={movie.poster_path}
+						/>)}
 				</div>
 			</>)
 	}
@@ -92,7 +98,10 @@ export const MoviesSection = (props: MoviesSectionProps) => {
 			<div className={css.main}>
 				<div className={css.header}>
 					<h1>{title}</h1>
-					<Button variant="outlined"><b style={{ margin: '3px 9px 1px 1px' }}>FILTER BY VOTE</b>
+					<Button variant="outlined">
+						<b style={{ margin: '3px 9px 1px 1px' }}>
+							FILTER BY VOTE
+						</b>
 						<MovieRating
 							value={rating}
 							handleChange={(e, value) => setRating(value)}
@@ -100,9 +109,15 @@ export const MoviesSection = (props: MoviesSectionProps) => {
 					</Button>
 				</div>
 				<div className={css.main}>
-					{movies && params.page && movies.length !== 0 &&
+					{params.page && movies.length !== 0 &&
 						<>
-							{movies.map(movie => <Movie key={movie.id} movie={movie} />)}
+							{movies.map(movie =>
+								<Movie
+									key={movie.id}
+									id={movie.id}
+									title={movie.title}
+									poster_path={movie.poster_path}
+								/>)}
 							<div className={css.pagination}>
 								<Pagination
 									page={parseInt(params.page)}
@@ -112,7 +127,7 @@ export const MoviesSection = (props: MoviesSectionProps) => {
 								/>
 							</div>
 						</>}
-					{movies && movies.length === 0 && <h1>Oops! No movies found with your selected rating</h1>}
+					{movies.length === 0 && <h1>Oops! No movies found with your selected rating</h1>}
 				</div>
 				<Outlet />
 			</div>)
