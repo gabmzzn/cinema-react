@@ -3,6 +3,7 @@ import { useEffect, useState } from 'react'
 import { useNavigate, useParams } from 'react-router-dom'
 import css from './InputSearch.module.scss'
 
+// Some warnings were disabled because they affect behavior
 export const InputSearch = () => {
 
 	let navigate = useNavigate()
@@ -17,6 +18,7 @@ export const InputSearch = () => {
 		params.hasOwnProperty('query') &&
 			params.query !== undefined &&
 			setQuery(params.query)
+		// eslint-disable-next-line
 	}, [])
 
 	// Here we clean the input if user changes route
@@ -24,6 +26,7 @@ export const InputSearch = () => {
 		if (query !== '' && !('query' in params)) {
 			setQuery('')
 		}
+		// eslint-disable-next-line
 	}, [params])
 
 	/*
@@ -41,6 +44,7 @@ export const InputSearch = () => {
 			}
 		}, 1000)
 		return () => clearTimeout(timer)
+		// eslint-disable-next-line
 	}, [query])
 
 	function handleQuery(query: string, key: boolean) {

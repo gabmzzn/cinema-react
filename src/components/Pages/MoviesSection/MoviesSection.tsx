@@ -65,7 +65,7 @@ export const MoviesSection = (props: MoviesSectionProps) => {
 			setLoading(false)
 		}
 		fetchMovies()
-	}, [params.page, sortBy, params.query])
+	}, [params.page, params.query, isLoaded, mini, movieId, section, sortBy])
 
 	/* 
  * Handles rating, if we unselect the rating we display the original fetch
@@ -84,7 +84,7 @@ export const MoviesSection = (props: MoviesSectionProps) => {
 		else {
 			setMovies(fetchedMovies)
 		}
-	}, [rating])
+	}, [rating, fetchedMovies])
 
 	//Here we make sure to not show loading screen when 'mini' is on
 	if (loading && !mini) return <LoadingScreen />

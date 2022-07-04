@@ -8,7 +8,6 @@ import reportWebVitals from './tests/reportWebVitals'
 import { MovieDetails } from './components/Pages/MovieDetails/MovieDetails'
 import { MoviesDiscovery } from './components/Pages/MoviesDiscovery/MoviesDiscovery'
 import { MoviesSection } from './components/Pages/MoviesSection/MoviesSection'
-import { MoviesSearch } from './components/Pages/MoviesSearch/MoviesSearch'
 import {
 	BrowserRouter,
 	Routes,
