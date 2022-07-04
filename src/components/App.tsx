@@ -32,7 +32,6 @@ function App() {
 		return <h1>API Authentication Key Not Found</h1>
 	}
 
-
 	return (
 		<ThemeProvider theme={theme}>
 			<Navbar />

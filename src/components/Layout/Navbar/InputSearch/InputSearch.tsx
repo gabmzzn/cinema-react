@@ -40,7 +40,7 @@ export const InputSearch = () => {
 	return (
 		<div className={css.search}>
 			<Input
-				placeholder="Search for your favorites movies"
+				placeholder="Search your movies"
 				sx={{ color: 'white' }}
 				fullWidth
 				value={query}

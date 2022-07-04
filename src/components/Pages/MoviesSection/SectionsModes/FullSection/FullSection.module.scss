@@ -1,0 +1,30 @@
+.main {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	width: 100%;
+	max-width: 1100px;
+}
+
+.header {
+	display: flex;
+	justify-content: space-between;
+	flex-wrap: wrap;
+	align-items: center;
+	width: 97%;
+}
+
+.pagination {
+	margin: 25px;
+	margin-top: 40px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 100%;
+}
+
+@media only screen and (max-width: 600px) {
+	.header {
+		justify-content: center;
+	}
+}

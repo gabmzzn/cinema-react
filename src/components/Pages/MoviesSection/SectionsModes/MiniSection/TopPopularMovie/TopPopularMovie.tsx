@@ -1,6 +1,6 @@
 import css from './TopPopularMovie.module.scss'
-import { Movie } from '../../../Layout/Movie/Movie'
-import { MovieDiscover } from '../../../../interfaces/Movie'
+import { Movie } from '../../../../../Layout/Movie/Movie'
+import { MovieDiscover } from '../../../../../../interfaces/Movie'
 import Button from '@mui/material/Button/Button'
 import { Link } from 'react-router-dom'
 import LocalActivityIcon from '@mui/icons-material/LocalActivity'

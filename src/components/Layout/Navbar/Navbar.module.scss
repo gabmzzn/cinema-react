@@ -4,9 +4,9 @@
 	white-space: nowrap;
 
 	.background {
-		background-color: rgba(20, 20, 20, 0.85);
+		background-color: rgba(20, 20, 20, 0.8);
 		backdrop-filter: blur(20px);
-		border-bottom: 2px solid rgba(255, 255, 255, 0.1);
+		border-bottom: 2px solid rgba(255, 255, 255, 0.08);
 		transition: background-color 0.25s, border-bottom 0.25s;
 	}
 
