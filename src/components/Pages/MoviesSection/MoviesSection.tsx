@@ -31,6 +31,12 @@ export const MoviesSection = (props: MoviesSectionProps) => {
 
 	const [loading, setLoading] = useState(true)
 
+	/* 
+* Handles rating, if we unselect the rating we display the original fetch
+*/
+	const [fetchedMovies, setFetchedMovies] = useState<MovieSearch[]>()
+	const [rating, setRating] = useState<number | null>(null)
+
 	let params = useParams()
 
 	/*
@@ -65,13 +71,8 @@ export const MoviesSection = (props: MoviesSectionProps) => {
 			setLoading(false)
 		}
 		fetchMovies()
-	}, [params.page, params.query, isLoaded, mini, movieId, section, sortBy])
-
-	/* 
- * Handles rating, if we unselect the rating we display the original fetch
- */
-	const [fetchedMovies, setFetchedMovies] = useState<MovieSearch[]>()
-	const [rating, setRating] = useState<number | null>(null)
+		// eslint-disable-next-line
+	}, [params.page, params.query])
 
 	useEffect(() => {
 		if (rating) {
