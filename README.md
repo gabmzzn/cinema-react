@@ -1,5 +1,5 @@
 
-# Enviorment Variables to make API Run
+# Environment Variables to run API
 
 REACT_APP_API_KEY 
 0d77c171613219dc1159ccff7557bf97
