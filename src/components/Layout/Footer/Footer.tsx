@@ -11,5 +11,10 @@ export const Footer = () => {
 					The Movie Database API
 				</a>
 			</h5>
+			<h5>
+				<a href="https://github.com/gabmzzn/cinema-react" target="_blank" rel="noopener noreferrer" >
+					GitHub Project Repository
+				</a>
+			</h5>
 		</div>)
 }
