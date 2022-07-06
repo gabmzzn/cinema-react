@@ -23,6 +23,22 @@
 	width: 100%;
 }
 
+.overflow {
+	display: flex;
+	max-width: 1100px;
+	overflow-x: scroll;
+	flex-direction: row;
+	padding: 12px 0 20px 3px;
+
+	img {
+		border-radius: 12px;
+	}
+
+	h1 {
+		margin-bottom: 0;
+	}
+}
+
 @media only screen and (max-width: 600px) {
 	.header {
 		justify-content: center;

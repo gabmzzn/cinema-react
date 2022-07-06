@@ -1,6 +1,6 @@
 import css from './TopPopularMovie.module.scss'
-import { Movie } from '../../../../../Layout/Movie/Movie'
-import { MovieDiscover } from '../../../../../../interfaces/Movie'
+import { Movie } from '../../../Layout/Movie/Movie'
+import { MovieDiscover } from '../../../../interfaces/Movie'
 import Button from '@mui/material/Button/Button'
 import { Link } from 'react-router-dom'
 import LocalActivityIcon from '@mui/icons-material/LocalActivity'
@@ -12,12 +12,7 @@ export const TopPopularMovie = ({ movie }: { movie: MovieDiscover }) => {
 	return (
 		<div className={css.topPopular}>
 			<div className={css.topPoster}>
-				<Movie
-					key={movie.id}
-					id={movie.id}
-					title={movie.title}
-					poster_path={movie.poster_path}
-				/>
+				<Movie movie={movie} />
 			</div>
 			<div className={css.titles}>
 				<h1>Top #1 popular movie right now 🔥</h1>

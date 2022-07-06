@@ -21,6 +21,7 @@ export const MoviesDiscovery = () => {
 				section={'popular'}
 				title={'Most popular movies at our theatres 🍿'}
 				sortBy={'popularity.desc'}
+				viewAll
 			/>
 			<MoviesSection
 				mini={10}
@@ -28,6 +29,7 @@ export const MoviesDiscovery = () => {
 				isLoaded={handleLoad}
 				title={'Latest releases of the month 📽️'}
 				sortBy={'release_date.desc&vote_count.gte=20'}
+				viewAll
 			/>
 			<MoviesSection
 				mini={10}
@@ -35,6 +37,7 @@ export const MoviesDiscovery = () => {
 				isLoaded={handleLoad}
 				title={'Our suggestions for you ❤️'}
 				sortBy={'vote_count.desc&vote_count.gte=20'}
+				viewAll
 			/>
 			<Outlet />
 		</div>

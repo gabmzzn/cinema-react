@@ -1,6 +1,6 @@
 import { useState, useEffect } from "react"
 import MovieRating from "../../Layout/MovieRating/MovieRating"
-import { MovieCard } from "../MoviesSection/Sections/FullSection/MovieCard/MovieCard"
+import { MovieCard } from "../../Layout/MovieCard/MovieCard"
 import css from './MoviesSearch.module.scss'
 import Pagination from '@mui/material/Pagination'
 import { useNavigate, Outlet, useParams } from 'react-router-dom'

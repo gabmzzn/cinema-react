@@ -62,7 +62,7 @@ export const MovieDetails = () => {
 					mini={20}
 					overflow
 					section={'similar'}
-					movieId={movie.id}
+					similarTo={movie.id}
 					title={'Similar movies to ' + movie.title}
 					sortBy={'popularity.desc'}
 				/>

@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom'
 import { MovieDetail, MovieDiscover, MovieSearch } from '../../../interfaces/Movie'
 import css from './Movie.module.scss'
 
-export const Movie = (movie: { id: number, title: string, poster_path: string | null }) => {
+export const Movie = ({ movie }: { movie: MovieDiscover }) => {
 
 	const poster = movie.poster_path ?
 		`https://image.tmdb.org/t/p/w300${movie.poster_path}` :

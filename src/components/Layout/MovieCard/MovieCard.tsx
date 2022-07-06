@@ -1,5 +1,5 @@
 import css from './MovieCard.module.scss'
-import { MovieDiscover } from '../../../../../../interfaces/Movie'
+import { MovieDiscover } from '../../../interfaces/Movie'
 import { Link } from 'react-router-dom'
 import StarIcon from '@mui/icons-material/Star'
 
@@ -21,10 +21,7 @@ export const MovieCard = ({ movie }: { movie: MovieDiscover }) => {
 	const movieLink = `../movie/${movie.id}-${movie.title.replaceAll(' ', '-').toLowerCase()}`
 	return (
 		<div className={css.movie} style={{ backgroundImage: `url(${backdrop})` }}>
-			<Link
-				to={movieLink}
-				key={movie.id}
-			>
+			<Link to={movieLink} key={movie.id}>
 				<div className={css.content}>
 					<div className={css.poster}>
 						<img
@@ -37,7 +34,10 @@ export const MovieCard = ({ movie }: { movie: MovieDiscover }) => {
 						</div>
 						<span>{overview.substr(0, 180)}</span>
 					</div>
-					<div className={css.vote}><StarIcon fontSize='medium' sx={{ color: 'darkorange' }} /><span>{vote}</span></div>
+					<div className={css.vote}>
+						<StarIcon fontSize='medium' sx={{ color: 'darkorange' }} />
+						<span>{vote}</span>
+					</div>
 				</div>
 			</Link>
 		</div>
