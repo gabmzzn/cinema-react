@@ -35,6 +35,11 @@ a {
 	color: white !important;
 }
 
+.Mui-selected {
+	border: 2px solid #ffffff26 !important;
+	background-color: #ffffff1c !important;
+}
+
 .MuiInput-root {
 	transition: all 0.25s;
 }
