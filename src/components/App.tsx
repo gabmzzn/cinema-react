@@ -35,7 +35,7 @@ function App() {
 	return (
 		<ThemeProvider theme={theme}>
 			<Navbar />
-			<div className={css.content}>
+			<div style={content}>
 				<Outlet />
 				<Footer />
 			</div>
@@ -45,3 +45,10 @@ function App() {
 
 export default App
 
+const content = {
+	display: 'flex',
+	flexDirection: 'column',
+	alignItems: 'center',
+	width: '100%',
+	minHeight: '1000px'
+} as React.CSSProperties
